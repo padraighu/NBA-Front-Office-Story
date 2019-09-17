@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     const nodes = [{"id":"Travis Schlenk","is_team":false},{"id":"Danny Ainge","is_team":false},{"id":"Sean Marks","is_team":false},{"id":"Mitch Kupchak","is_team":false},{"id":"Donn Nelson","is_team":false},{"id":"Tim Connelly","is_team":false},{"id":"Daryl Morey","is_team":false},{"id":"Kevin Pritchard","is_team":false},{"id":"Lawrence Frank","is_team":false},{"id":"Pat Riley","is_team":false},{"id":"Jon Horst","is_team":false},{"id":"Scott Layden","is_team":false},{"id":"David Griffin","is_team":false},{"id":"Scott Perry","is_team":false},{"id":"Sam Presti","is_team":false},{"id":"Neil Olshey","is_team":false},{"id":"R.C. Buford","is_team":false},{"id":"Masai Ujiri","is_team":false},{"id":"Dennis Lindsey","is_team":false},{"id":"Tommy Sheppard","is_team":false},{"id":"Koby Altman","is_team":false},{"id":"Vlade Divac","is_team":false},{"id":"Gar Forman","is_team":false},{"id":"Ed Stefanski","is_team":false},{"id":"Bob Myers","is_team":false},{"id":"Rob Pelinka","is_team":false},{"id":"Chris Wallace","is_team":false},{"id":"Jeff Weltman","is_team":false},{"id":"Elton Brand","is_team":false},{"id":"James Jones","is_team":false},{"id":"Golden State Warriors","is_team":true},{"id":"Miami Heat","is_team":true},{"id":"Orlando Magic","is_team":true},{"id":"Phoenix Suns","is_team":true},{"id":"San Antonio Spurs","is_team":true},{"id":"Los Angeles Lakers","is_team":true},{"id":"Milwaukee Bucks","is_team":true},{"id":"Washington Wizards","is_team":true},{"id":"New Orleans Pelicans","is_team":true},{"id":"Boston Celtics","is_team":true},{"id":"Portland Trail Blazers","is_team":true},{"id":"Memphis Grizzlies","is_team":true},{"id":"Brooklyn Nets","is_team":true},{"id":"Detroit Pistons","is_team":true},{"id":"New York Knicks","is_team":true},{"id":"Utah Jazz","is_team":true},{"id":"Cleveland Cavaliers","is_team":true},{"id":"Oklahoma City Thunder","is_team":true},{"id":"Sacramento Kings","is_team":true},{"id":"Los Angeles Clippers","is_team":true},{"id":"Denver Nuggets","is_team":true},{"id":"Toronto Raptors","is_team":true},{"id":"Houston Rockets","is_team":true},{"id":"Atlanta Hawks","is_team":true},{"id":"Charlotte Hornets","is_team":true},{"id":"Chicago Bulls","is_team":true},{"id":"Dallas Mavericks","is_team":true},{"id":"Indiana Pacers","is_team":true},{"id":"Minnesota Timberwolves","is_team":true},{"id":"Philadelphia 76ers","is_team":true}]
 
     const width = 1400;
-    const height = 500;
+    const height = 1000;
 
     const drag = simulation => {
     
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     }
 
     const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id))
+    .force("link", d3.forceLink(links).id(d => d.id).strength(0.1))
     .force("charge", d3.forceManyBody().strength(-30))
     .force("center", d3.forceCenter(width / 2, height / 2));
     const svg = d3.select('body').append('svg')//.create("svg")
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     .selectAll("circle")
     .data(teams)
     .join("circle")
-    .attr("r", 5)
+    .attr("r", 15)
     .attr("fill", "orange")
     .call(drag(simulation));
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     .selectAll("circle")
     .data(gms)
     .join("circle")
-    .attr("r", 15)
+    .attr("r", 5)
     .attr("fill", "blue")
     .call(drag(simulation));
 
