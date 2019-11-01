@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <!-- <script src="graph.js"></script> -->
+    <script src="graph_static.js"></script>
+    <script src="profiles.js"></script>
+    <script src="timeline_.js"></script>
+    <style>
+    text {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+    </style>
+</head>
+<body>
+    <div id="graph"></div>
+    <b id="count"></b> out of <b>30</b> (<b id="percentage"></b>) NBA GMs 
+    <select onchange="filterProfiles(this.value)">
+        <option value="Ex NBA Player">played in the NBA</option>
+        <option value="Ex College Player">played college basketball</option>
+        <option value="Ex NBA Coach">coached in the NBA</option>
+        <option value="Ex College Coach">coached college basketball</option>
+        <option value="Ex Agent">represented NBA players as an agent</option>
+        <option value="Ex Scout">scouted for an NBA team</option>
+        <option value="Ex Video">edited video for an NBA team</option>
+        <option value="MBA">held an MBA degree</option>
+        <option value="JD">held a JD degree</option>
+        <option value="Promoted">were internally promoted to current position</option>
+        <option value="Sloan">attended the Sloan Sports Analytics Conference in the past</option>
+    </select>
+    <div id="profiles"></div>
+    <div id="timeline"></div>
+</body>
+</html>
