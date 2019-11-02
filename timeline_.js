@@ -5,10 +5,14 @@ import dat from "./data/gms.json";
         .append("svg")
         .attr("viewBox", "0 0 1500 800");
 
-    dat.sort((a, b) => ((Date.parse(a["Current Start Date"]) - Date.parse(b["Current Start Date"]))));
+   dat.forEach(d => {
+      d["Current Start Date"] = Date.parse(d["Current Start Date"]);
+   });
+
+    dat.sort((a, b) => ((a["Current Start Date"] - b["Current Start Date"])));
 
 
-    const dates = dat.map(d => Date.parse(d["Current Start Date"]));
+    const dates = dat.map(d => d["Current Start Date"]);
     const maxDate = new Date(Math.max.apply(null, dates));
 
     const minDate = new Date(Math.min.apply(null, dates));
@@ -36,7 +40,7 @@ import dat from "./data/gms.json";
         .call(yAxis);
 
     const bins = d3.histogram()
-        .value(d => Date.parse(d["Current Start Date"]))
+        .value(d => d["Current Start Date"])
         .domain(dateScale.domain())
         .thresholds(d3.thresholdFreedmanDiaconis(dates, minDate, maxDate))(dat);//.thresholds()
 
@@ -70,7 +74,7 @@ import dat from "./data/gms.json";
         .selectAll("line")
         .data(dat)
         .join("line")
-        .attr("x1", d => dateScale(Date.parse(d["Current Start Date"])))
+        .attr("x1", d => dateScale(d["Current Start Date"]))
         .attr("x2", dateScale(maxDate))
         .attr("y1", d => (gmScale(d["Name"])+0.5))
         .attr("y2", d => (gmScale(d["Name"])+0.5))
@@ -80,7 +84,7 @@ import dat from "./data/gms.json";
             .data(dat)
             .join("circle")
             .attr("transform", `translate(0, 0)`)
-            .attr("cx", d => (dateScale(Date.parse(d["Current Start Date"]))))
+            .attr("cx", d => (dateScale(d["Current Start Date"])))
             .attr("cy", d => (gmScale(d["Name"])))
             .attr("r", 5)
             .attr("fill", "green")
