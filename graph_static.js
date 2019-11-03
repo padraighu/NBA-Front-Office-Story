@@ -1,20 +1,8 @@
 import pfps from "./assets/*.png";
-// import gmPos from "./graph_pos.json";
 import links from "./data/links.json";
 import nodes from "./data/nodes.json";
 
 document.addEventListener("DOMContentLoaded", e => {
-    // console.log(gmPos);
-    // nodes.forEach(n => {
-    //     let gm = gmPos.find(g => g.id === n.id);
-    //     n.x = gm.x;
-    //     n.y = gm.y;
-    // });
-    // links.forEach(l => {
-    //     l.source = nodes.find(n => n.id === l.source);
-    //     l.target = nodes.find(n => n.id === l.target);
-    // });
-    // console.log(nodes);
     const width = 1400;
     const height = 1000;
 
