@@ -55,8 +55,6 @@ window.filterProfiles = (val) => {
            .on("start", repeat);
      });
 
-   //   simulation.force("x", d3.forceX(d => (d[val]["x"])).strength(0.5)).force("y", d3.forceY(d => (d[val]["y"])).strength(0.5));
-   //   simulation.alpha(0.12).alphaTarget(0.1).restart();
    profiles.transition()
       .duration(1000)
       .attr("transform", d => `translate(${d[val]["x"]}, ${d[val]["y"]})`);
@@ -69,8 +67,36 @@ window.filterProfiles = (val) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-   //  console.log(dat);
-    // console.log("hello world");
+    d3.select("#profiles")
+      .append("a")
+      .html("<b id=\"count\"></b> out of <b>30</b> (<b id=\"percentage\"></b>) NBA GMs ");
+
+    d3.select("#profiles")
+      .append("select")
+      .attr("id", "filter")
+      .attr("onchange", "filterProfiles(this.value)");
+
+    const filters = [
+      {value: "Ex NBA Player", text: "played in the NBA"},
+      {value: "Ex College Player", text: "played college basketball"},
+      {value: "Ex NBA Coach", text: "coached in the NBA"},
+      {value: "Ex College Coach", text: "coached college basketball"},
+      {value: "Ex Agent", text: "represented NBA players as an agent"},
+      {value: "Ex Scout", text: "scouted for an NBA team"},
+      {value: "Ex Video", text: "edited video for an NBA team"},
+      {value: "MBA", text: "held an MBA degree"},
+      {value: "JD", text: "held a JD degree"},
+      {value: "Promoted", text: "were internally promoted to current position"},
+      {value: "Sloan", text: "attended the Sloan Sports Analytics Conference in the past"}
+    ];
+
+    filters.forEach(f => {
+      d3.select("#filter")
+        .append("option")
+        .attr("value", f.value)
+        .text(f.text);
+    });
+
     const svg = d3.select("#profiles")
     .append("svg")
     .attr("viewBox", "0 0 1500 800");
@@ -101,21 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .attr("border-radius", "50%");
 
     const tooltipG = svg.append("g")
-   //  var callout = tooltipG.append("rect")
-   //  .attr("width", 100)
-   //  .attr("height", 70)
-   //  .attr("rx", 15)
-   //  .attr("x", 0)
-   //  .attr("y", 0)
-   //  .attr("fill", "white")
-   //  .attr("stroke", "black");
-   //  const tooltipText = tooltipG.append("text").append("tspan")
-   //  .attr("text-anchor", "middle")
-   //  .attr("x", 0)
-   //  .attr("y", 0)
-   //  .text("hello worlrd");
 
-   // tooltipG.attr("transform", `translate(${300}, ${500})`);
    var callout = d3.select("body").append("div")
     .style("opacity", 0)
     .style("position", "absolute")
@@ -131,24 +143,15 @@ document.addEventListener("DOMContentLoaded", () => {
     .data(dat)
     .join("image")
     .attr("xlink:href", d => pfps[d["Picture"].replace(".png", "")])
-   //  .attr("x", d => (d.x-30))
-   //  .attr("y", d => (d.y-30))
     .attr("height", 60)
     .attr("width", 60)
     .attr("border-radius", "50%")
     .attr("filter", "url(#gray)")
     .attr("opacity", d => (d["Ex NBA Player"]["val"] == true ? 0 : 1))
     .on("mouseover", d => {
-       console.log(`${d.Team} ${d.Name}`);
-       console.log(d);
+      //  console.log(`${d.Team} ${d.Name}`);
+      //  console.log(d);
        tooltipG.attr("transform", `translate(${d.x-30}, ${d.y + 50})`)
-      //  console.log(d3.select(this).attr("x"));
-      //console.log(this.getAttribute("x"));
-      // var matrix = this.getScreenCTM()
-      // .translate(+this.getAttribute("cx"),
-      //          +this.getAttribute("cy"));
-      // console.log(profile_images_gray.selectAll("image").filter(d1 => d1.Name === s.Name));
-      // console.log(profile_images_gray.node().getBoundingClientRect())
        callout.style("opacity", 1);
     })
     .on("mousemove", d => {
@@ -170,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const gmCount = dat.filter(d => (d["Ex NBA Player"]["val"]==true)).length;
     d3.select("#count")
-    //.transition()
     .text(gmCount);
 
     const pct = d3.format(".1%")(gmCount / 30);
