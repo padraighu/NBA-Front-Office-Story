@@ -89,26 +89,54 @@ import dat from "./data/gms.json";
             .attr("r", 5)
             .attr("fill", "green")
             .attr("stroke", "black");
-    dots.transition()
-        .delay(2000)
-        .attr("cy", 500);
-    lines.transition()
-        .delay(2000)
-        .style("opacity", 0);
-    y.transition()
-        .delay(2000)
-        .style("opacity", 0);
-    y2.transition()
-        .delay(3000)
-        .style("opacity", 1);
+    // dots.transition()
+    //     .delay(2000)
+    //     .attr("cy", 500);
+    // lines.transition()
+    //     .delay(2000)
+    //     .style("opacity", 0);
+    // y.transition()
+    //     .delay(2000)
+    //     .style("opacity", 0);
+    // y2.transition()
+    //     .delay(3000)
+    //     .style("opacity", 1);
 
-    dots.transition()
-        //.duration(5000)
-        .delay(3000)
-        .style("opacity", 0);
-    bars.transition()
-        //.duration(800)
-        .delay(3000)
-        .attr("height", d => (500-countScale(d.length)))
-        .attr("y", d => countScale(d.length));
+    // dots.transition()
+    //     //.duration(5000)
+    //     .delay(3000)
+    //     .style("opacity", 0);
+    // bars.transition()
+    //     //.duration(800)
+    //     .delay(3000)
+    //     .attr("height", d => (500-countScale(d.length)))
+    //     .attr("y", d => countScale(d.length));
+
+    const focus = dat.find(d => d["Name"] === "Jeff Weltman")
+    console.log(focus);
+    const annotations = [{
+        note: {
+            label: "Recruiting seasons often happen immediately after regular season ends."
+        },
+        data: focus,
+        dy: 100,
+        dx: -100,
+        subject: {
+            width: 25,
+            height: 100
+        }
+    }];
+
+    const makeAnnotations = d3.annotation()
+        .type(d3.annotationCalloutRect)
+        .accessors({
+            x: d => (dateScale(d["Current Start Date"])-8),
+            y: d => (gmScale(d["Name"])-8)
+        })
+        // .accessorsInverse({
+        // })
+        .annotations(annotations);
+    svg
+        .append("g")
+        .call(makeAnnotations);
  });
