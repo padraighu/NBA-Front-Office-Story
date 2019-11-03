@@ -28,7 +28,7 @@ gm2gm <- gm2team %>%
   mutate(From=max(From.x, From.y), To=min(To.x, To.y)) %>% 
   distinct_at(vars(GM.a, GM.b, Team, From, To)) %>%
   arrange(Team) %>% 
-  select(GM.a, GM.b, From, To) %>% 
+  select(GM.a, GM.b, Team, From, To) %>% 
   rename(Source=GM.a, Target=GM.b)
 
 all <- gm2team %>% 
@@ -42,11 +42,13 @@ all <- gm2team %>%
 links <- gm2gm %>% 
   ungroup() %>% 
   mutate(length=To-From) %>% 
+  rowwise() %>% 
+  mutate(fromto=str_c(c(From, To), collapse = '-')) %>% 
   group_by(Source, Target) %>% 
-  summarise(length_tot=sum(length)) %>% 
+  summarise(length_tot=sum(length), 
+            duration=str_c(fromto, collapse = ", "), 
+            team=str_c(unique(Team), collapse = ',')) %>% 
   rename(source=Source, target=Target, length=length_tot)
-#colnames(links) <- c('source', 'target', 'length')
-#links$value <- 1
 
 teams <- current_gms %>% pull(Team)
 nodes <- all %>% pull(Source) %>% union(all %>% pull(Target)) %>% unique()

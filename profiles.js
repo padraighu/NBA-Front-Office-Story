@@ -126,9 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .attr("width", 60)
     .attr("border-radius", "50%");
 
-    const tooltipG = svg.append("g")
+    // const tooltipG = svg.append("g")
 
-   var callout = d3.select("body").append("div")
+   const callout = d3.select("body").append("div")
     .style("opacity", 0)
     .style("position", "absolute")
     .style("background-color", "white")
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .style("border-width", "2px")
     .style("border-radius", "5px")
     .style("padding", "5px")
-    .style("left", 400)
+    .style("left", 400) // TODO is this needed?
     .style("top", 100);
 
     profile_images_gray = svg.append("g").selectAll("image")
@@ -151,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .on("mouseover", d => {
       //  console.log(`${d.Team} ${d.Name}`);
       //  console.log(d);
-       tooltipG.attr("transform", `translate(${d.x-30}, ${d.y + 50})`)
+      //  tooltipG.attr("transform", `translate(${d.x-30}, ${d.y + 50})`)
        callout.style("opacity", 1);
     })
     .on("mousemove", d => {
       // console.log(`${d3.event.pageX} ${d3.event.pageY}`);
-      callout.html((`${d.Name}</br>${d.Team}</br>${d["Current Start Date"]}`))
+      callout.html(`${d.Name}</br>${d.Team}</br>${d["Current Start Date"]}`)
       .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
       .style("top", `${d3.event.pageY+40}px`) //`${d3.event.pageY}px` "500px"
     })
