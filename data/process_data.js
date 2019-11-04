@@ -12,6 +12,9 @@ nodes.forEach(n => {
     let gm = gmPos.find(g => g.id === n.id);
     n.x = gm.x;
     n.y = gm.y;
+    gm = gms.find(g => g["Name"] === n.id)
+    n.team = gm["Team"];
+    n.start = gm["Current Start Date"];
 });
 links.forEach(l => {
     l.source = nodes.find(n => n.id === l.source);

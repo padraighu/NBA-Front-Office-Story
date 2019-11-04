@@ -38,17 +38,38 @@ all <- gm2team %>%
   mutate(Current=F) %>% 
   dplyr::union(current_gms_cleaned)
 
+## merge intervals
+merge_int <- function(ints) {
+  years <- unlist(map(str_split(ints, ", "), ~ str_split(., "-")))
+  if (length(years) == 2) return(ints)
+  years <- tbl_df(years) %>% 
+    group_by(value) %>% 
+    summarise(n=n()) %>% 
+    filter(n==1|n==3) %>% 
+    pull(value)
+  merged <- c()
+  if (length(years) <= 1) #{print(ints);return("shit")}
+  {
+    years <- unlist(map(str_split(ints, ", "), ~ str_split(., "-")))
+    years <- unique(years)[1:2]
+  }
+  for (i in seq(1,length(years)-1,2)) {
+    merged <- c(merged, str_c(years[i], years[i+1], sep="-"))
+  }
+  str_c(merged, collapse=", ")
+}
 ## only GM-GM
 links <- gm2gm %>% 
   ungroup() %>% 
   mutate(length=To-From) %>% 
-  rowwise() %>% 
-  mutate(fromto=str_c(c(From, To), collapse = '-')) %>% 
+  unite(fromto, From:To, sep="-") %>% 
   group_by(Source, Target) %>% 
   summarise(length_tot=sum(length), 
             duration=str_c(fromto, collapse = ", "), 
             team=str_c(unique(Team), collapse = ',')) %>% 
-  rename(source=Source, target=Target, length=length_tot)
+  rowwise() %>% 
+  mutate(duration=merge_int(duration)) %>% 
+  rename(source=Source, target=Target, length=length_tot) 
 
 teams <- current_gms %>% pull(Team)
 nodes <- all %>% pull(Source) %>% union(all %>% pull(Target)) %>% unique()

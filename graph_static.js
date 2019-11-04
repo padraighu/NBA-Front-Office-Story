@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", e => {
         .attr("type", "matrix")
         .attr("values", "0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0");
 
+    // TODO dynamic scale
     const linkWidthScale = d3.scaleOrdinal([0,1,2,3,4,5], [1,2,3,4,5,6]);
 
     const link = svg.append("g")
@@ -99,7 +100,7 @@ document.addEventListener("DOMContentLoaded", e => {
             callout.style("opacity", 0);
         })
         .on("mousemove", d => {
-            callout.html(`${d.id}</br>${d.Team}</br>${d["Current Start Date"]}`)
+            callout.html(`${d.id}</br>${d.team}</br>${d.start}`)
             .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
             .style("top", `${d3.event.pageY+40}px`)
         });
