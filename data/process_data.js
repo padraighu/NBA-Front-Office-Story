@@ -24,6 +24,7 @@ console.log("done");
 console.log("profile data...");
 
 const filters = ["Ex NBA Player", "Ex College Player", "Ex NBA Coach", "Ex College Coach", "Ex Agent", "Ex Scout", "Ex Video", "MBA", "JD", "Promoted", "Sloan"];
+gms.sort((a, b) => a["Name"].localeCompare(b["Name"]));
 filters.forEach((f) => {
   let x = 0;
   let y = 0;
