@@ -52,8 +52,7 @@ document.addEventListener("DOMContentLoaded", e => {
             callout.style("opacity", 0);
         })        
         .on("mousemove", d => {
-            // TODO year / years ?
-            callout.html(`${d.team}</br>${d.duration}</br>${d.length} years`)
+            callout.html(`${d.team}</br>${d.duration}</br>${(d.length != 0) ? d.length : "< 1"} ${(d.length > 1) ? "years" : "year"}`)
             .style("left", `${d3.event.pageX-50}px`)
             .style("top", `${d3.event.pageY+40}px`)
         });;

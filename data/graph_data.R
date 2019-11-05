@@ -80,7 +80,7 @@ links <- gm2gm %>%
   mutate(duration=merge_int(duration)) %>% 
   rename(source=Source, target=Target, length=length_tot) 
 
-#links %>% filter(length==0)
+links %>% filter(length==0) %>% write_tsv('temp.txt')
 
 teams <- current_gms %>% pull(Team)
 nodes <- all %>% pull(Source) %>% union(all %>% pull(Target)) %>% unique()
@@ -88,6 +88,19 @@ nodes <- data.frame(id=nodes) %>%
   filter(!id%in%teams) %>% 
   inner_join(gm_pfp, c('id'='Name')) 
 
+
+# filter out bogus connections 
+# e.g. X left team A before Y joined team A in year 20XX
+# because only years are counted, they appear to have worked
+# together when they didn't
+links <- links %>% 
+  filter(!(length==0&source=='Jeff Weltman')) %>% 
+  filter(!(length==0&source=='Masai Ujiri')) %>% 
+  filter(!(length==0&source=='Rob Pelinka')) %>% 
+  filter(!(length==0&source=='Sam Presti')) %>% 
+  filter(!(length==0&source=='Scott Perry')) %>% 
+  filter(!(length==0&source=='Tim Connelly')) %>% 
+  filter(!(length==0&source=='Tommy Sheppard'))
 
 # calculate degree
 links %>% write_json('links.json')
