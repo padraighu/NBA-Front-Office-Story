@@ -6,7 +6,7 @@ var node1;
 var simulation;
 var simStopped = false;
 window.dumpPos = () => {
-    console.log(node1.data().map(d => ({id: d.id, x: d.x, y:d.y})));
+    console.log(JSON.stringify(node1.data().map(d => ({id: d.id, x: d.x, y:d.y}))));
 }
 
 window.stopSim = () => {
