@@ -8,27 +8,26 @@ setwd('C:/Users/Yifei Hu/Desktop/nba-gm/analysis')
 current_gms <- read_csv('Master.csv')
 gm2team <- read_csv('GMToTeam.csv')
 gm_pfp <- read_csv('Master.csv') %>% 
-  mutate(pfp=str_c(str_replace(Picture, '.jpg', ''), '_pfp.png')) %>% 
+  mutate(pfp=str_c(Picture, '_pfp.png', sep='')) %>% 
   select(Name, pfp) 
 
 current_gms_cleaned <- current_gms %>% 
-  mutate(From=year(mdy(`Current Start Date`))) %>% 
+  mutate(From=year(ymd(`Current Start Date`))) %>% 
   mutate(To=2019) %>% 
   select(Name, Team, From, To) %>% 
   rename(Source=Name, Target=Team) %>% 
   mutate(Current=T)
 
-#dat <- read_csv('dat.csv')
 # combine past with current experiences 
-dat <- gm2team %>% 
-  select(GM, Team, From, To) %>% 
+dat <- gm2team %>%
+  select(GM, Team, From, To) %>%
   dplyr::union(
-    current_gms %>% 
-      filter_all(any_vars(!is.na(.))) %>% 
-      mutate(From=year(mdy(`Current Start Date`)), To=2019) %>% 
-      rename(GM=Name) %>% 
-      select(GM, Team, From, To) 
-  ) 
+    current_gms %>%
+      filter_all(any_vars(!is.na(.))) %>%
+      mutate(From=year(ymd(`Current Start Date`)), To=2019) %>%
+      rename(GM=Name) %>%
+      select(GM, Team, From, To)
+  )
 gm2gm <- gm2team %>% 
   inner_join(dat, by='Team') %>% 
   select(GM.x, GM.y, Team, From.x, To.x, From.y, To.y) %>% 
@@ -95,7 +94,7 @@ links %>% write_json('links.json')
 nodes %>% write_json('nodes.json')
 
 current_gms %>% 
-  mutate('Current Start Date'=mdy(`Current Start Date`)) %>% 
+  mutate('Current Start Date'=ymd(`Current Start Date`)) %>% 
   select(
     'Team', 
     'Name',
@@ -117,5 +116,5 @@ current_gms %>%
     'Picture'
     ) %>% 
   filter_all(any_vars(!is.na(.))) %>%
-  mutate(Picture=str_replace(Picture, '.jpg', '_pfp.png')) %>% 
+  mutate(Picture=str_c(Picture, '_pfp.png', sep='')) %>% 
   write_json("gms.json")
