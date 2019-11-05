@@ -18,7 +18,17 @@ current_gms_cleaned <- current_gms %>%
   rename(Source=Name, Target=Team) %>% 
   mutate(Current=T)
 
-dat <- read_csv('dat.csv')
+#dat <- read_csv('dat.csv')
+# combine past with current experiences 
+dat <- gm2team %>% 
+  select(GM, Team, From, To) %>% 
+  dplyr::union(
+    current_gms %>% 
+      filter_all(any_vars(!is.na(.))) %>% 
+      mutate(From=year(mdy(`Current Start Date`)), To=2019) %>% 
+      rename(GM=Name) %>% 
+      select(GM, Team, From, To) 
+  ) 
 gm2gm <- gm2team %>% 
   inner_join(dat, by='Team') %>% 
   select(GM.x, GM.y, Team, From.x, To.x, From.y, To.y) %>% 
@@ -34,7 +44,7 @@ gm2gm <- gm2team %>%
 all <- gm2team %>% 
   select(GM, Team, From, To) %>% 
   rename(Source=GM, Target=Team) %>% 
-  dplyr::union(gm2gm) %>% 
+  dplyr::union(gm2gm %>% select(Source, Target, From, To)) %>% 
   mutate(Current=F) %>% 
   dplyr::union(current_gms_cleaned)
 
@@ -48,7 +58,7 @@ merge_int <- function(ints) {
     filter(n==1|n==3) %>% 
     pull(value)
   merged <- c()
-  if (length(years) <= 1) #{print(ints);return("shit")}
+  if (length(years) <= 1) 
   {
     years <- unlist(map(str_split(ints, ", "), ~ str_split(., "-")))
     years <- unique(years)[1:2]
@@ -70,6 +80,8 @@ links <- gm2gm %>%
   rowwise() %>% 
   mutate(duration=merge_int(duration)) %>% 
   rename(source=Source, target=Target, length=length_tot) 
+
+#links %>% filter(length==0)
 
 teams <- current_gms %>% pull(Team)
 nodes <- all %>% pull(Source) %>% union(all %>% pull(Target)) %>% unique()
