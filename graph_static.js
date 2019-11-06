@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", e => {
         .attr("values", "0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0");
 
     // TODO dynamic scale
-    const linkWidthScale = d3.scaleOrdinal([0,1,2,3,4,5], [1,2,3,4,5,6]);
+    const linkWidthScale = d3.scaleOrdinal([0,1,2,3,4,5,6,7], [1,2,3,4,5,6,7,8]).unknown(13);
 
     const link = svg.append("g")
         .selectAll("line")
