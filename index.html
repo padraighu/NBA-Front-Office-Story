@@ -10,16 +10,83 @@
     <script src="graph_static.js"></script>
     <script src="profiles.js"></script>
     <script src="timeline_.js"></script>
-    
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="main.js"></script>
     <style>
     text {
-  font-family: sans-serif;
-  font-size: 10px;
-}
+        font-family: sans-serif;
+        font-size: 10px;
+    }
+    .step {
+        width: 50%;
+        height: 30%;
+        /* border: solid; */
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 100vh;
+        /* margin-top: 20%; */
+        /* opacity: 0; */
+    }
+
+    .step p {
+        color: white;
+    }
+
+    #graph {
+        position: sticky;
+    }
+
+    /* body {
+        background:url(./assets/1996-97_team_photo320.jpg) no-repeat; background-size: 100%;
+    } */
+    .bg {
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+
+        /* Preserve aspet ratio */
+        min-width: 100%;
+        /* min-height: 100%; */
+        max-width: 100%;
+        /* max-height: 100%; */
+        -webkit-transition: opacity 1s ease-in-out;
+        -moz-transition: opacity 1s ease-in-out;
+        -o-transition: opacity 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
+        /* transition: background-image 1s ease-in-out; */
+    }
     </style>
 </head>
 <body>
+    <img class="bg" id="ainge-nelson" src="./assets/1996-97_team_photo320.jpg" style="opacity: 0;">
+    <img class="bg" id="griffin-suns" src="./assets/98401133.0.jpg" style="opacity: 0;">
+    <img class="bg" id="griffin-james" src="./assets/539693808.jpg.0.webp" style="opacity: 0;">
     <div id="timeline"></div>
+    <div class="step" id="ainge-nelson-p">
+        <p>Sunny Days<br>Danny Ainge, who played his last 3 years of NBA career at the Phoenix Suns, became head coach for the Suns in 1996.
+            Donn Nelson was one of Ainge's assistant coaches, until he left the Suns for the Mavericks in 1998, rejoining his father Don Nelson.
+            Ainge resigned from the Suns in 1999, and became GM for the Celtics in 2003. Nelson became GM for the Mavs in 2003.
+            <br>In 2014, Ainge traded all star point guard Rajon Rondo to Nelson's Mavs, which hoped the addition of Rondo would assist Mav's aging star Nowitzki in another playoffs push.
+        </p>
+    </div>
+    <div class="step" id="griffin-suns-p">
+        <p>Also working at the Suns in the mid 90s was a young man named David Griffin, who just finished college at ASU.
+            Griffin started as a media intern, but moved to basketbal operations in 1997, working tasks typical for junior guys in an NBA front office such as editing videos and player evaluation.
+            Griffin worked for the Suns for 17 seasons, promoted to Senior Vice President of Basketball Operations in 2007. He joined the Cavaliers in 2010.
+        </p>
+    </div>
+    <div class="step" id="griffin-james-p">
+        <p>Griffin would eventually become GM for the Cavaliers. 
+            In 2014, Cavaliers emerged as a possible destination for free agent Lebron James, whose all-star prowess would make any team an immediate contender.
+            To sign James with a max contract, however, Cavs would need to find ways to clear enough cap space by trading away existing players on their roster.
+            Griffin found a willing partner in Ainge's Celtics, who swallowed Tyler Zeller's and Marcus Thorton's contracts in a 3 way trade between Cavs, Celtics and Nets.
+            Two days after the trade, the Cavaliers, now with enough cap space, signed Lebron James.
+            <br>James would led the Cavs to win the franchise's first NBA championship in 2016.
+        </p>
+    </div>
     <div id="graph"></div>
     <div id="profiles"></div>
 </body>
