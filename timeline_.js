@@ -17,7 +17,6 @@ import dat from "./data/gms.json";
 
     const minDate = new Date(Math.min.apply(null, dates));
 
-    console.log(`max: ${maxDate} min: ${minDate}`);
 
     const dateScale = d3.scaleTime()
         .domain([minDate, maxDate])
@@ -44,7 +43,6 @@ import dat from "./data/gms.json";
         .domain(dateScale.domain())
         .thresholds(d3.thresholdFreedmanDiaconis(dates, minDate, maxDate))(dat);//.thresholds()
 
-    console.log(bins);
 
     const countScale = d3.scaleLinear()
         .domain([0, d3.max(bins, d => d.length)])
@@ -113,7 +111,6 @@ import dat from "./data/gms.json";
     //     .attr("y", d => countScale(d.length));
 
     const focus = dat.find(d => d["Name"] === "Jeff Weltman")
-    console.log(focus);
     const annotations = [{
         note: {
             label: "Recruiting seasons often happen immediately after regular season ends."
