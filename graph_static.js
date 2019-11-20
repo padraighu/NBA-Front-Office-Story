@@ -40,21 +40,27 @@ document.addEventListener("DOMContentLoaded", e => {
         .attr("x2", d => d.target.x)
         .attr("y2", d => d.target.y)
         .on("mouseover", d => {
-            avatars.attr("filter", a => (a.id === d.source.id || a.id === d.target.id) ? "" : "url(#gray)");
-            link.style("stroke", l => (l === d) ? "black" : "#999")
-                .attr("stroke-width", l => ((l === d) ? 2 * linkWidthScale(l.length) : linkWidthScale(l.length)));
-            callout.style("opacity", 1);
+            if (window.graphActive) {
+                avatars.attr("filter", a => (a.id === d.source.id || a.id === d.target.id) ? "" : "url(#gray)");
+                link.style("stroke", l => (l === d) ? "black" : "#999")
+                    .attr("stroke-width", l => ((l === d) ? 2 * linkWidthScale(l.length) : linkWidthScale(l.length)));
+                callout.style("opacity", 1);
+            }
         })
         .on("mouseout", d => {
-            avatars.attr("filter", "");
-            link.style("stroke", "#999")
-                .attr("stroke-width", d => (linkWidthScale(d.length)));
-            callout.style("opacity", 0);
+            if (window.graphActive) {
+                avatars.attr("filter", "");
+                link.style("stroke", "#999")
+                    .attr("stroke-width", d => (linkWidthScale(d.length)));
+                callout.style("opacity", 0);
+            }
         })        
         .on("mousemove", d => {
-            callout.html(`${d.team}</br>${d.duration}</br>${(d.length != 0) ? d.length : "< 1"} ${(d.length > 1) ? "years" : "year"}`)
-            .style("left", `${d3.event.pageX-50}px`)
-            .style("top", `${d3.event.pageY+40}px`)
+            if (window.graphActive) {
+                callout.html(`${d.team}</br>${d.duration}</br>${(d.length != 0) ? d.length : "< 1"} ${(d.length > 1) ? "years" : "year"}`)
+                .style("left", `${d3.event.pageX-50}px`)
+                .style("top", `${d3.event.pageY+40}px`)
+            }
         });;
 
     const node = svg.append("g")
@@ -77,30 +83,37 @@ document.addEventListener("DOMContentLoaded", e => {
         .attr("width", 60)
         .attr("border-radius", "50%")
         .on("mouseover", d => {
-            avatars.attr("filter", a => {
-                if (a === d) {
-                    return "";
-                } else if (links.filter(l => (l.source.id == a.id && l.target.id == d.id)).length > 0) {
-                    return "";
-                } else if (links.filter(l => (l.source.id == d.id && l.target.id == a.id)).length > 0) {
-                    return "";
-                } else {
-                    return "url(#gray)";
-                }
-            });
-            link.style("stroke", l => (l.source.id === d.id || l.target.id === d.id) ? "black" : "#999")
-                .attr("stroke-width", l => ((l.source.id === d.id || l.target.id === d.id) ? 2 * linkWidthScale(l.length) : linkWidthScale(l.length)));
-            callout.style("opacity", 1);
+            // console.log(window.graphActive)
+            if (window.graphActive) {
+                avatars.attr("filter", a => {
+                    if (a === d) {
+                        return "";
+                    } else if (links.filter(l => (l.source.id == a.id && l.target.id == d.id)).length > 0) {
+                        return "";
+                    } else if (links.filter(l => (l.source.id == d.id && l.target.id == a.id)).length > 0) {
+                        return "";
+                    } else {
+                        return "url(#gray)";
+                    }
+                });
+                link.style("stroke", l => (l.source.id === d.id || l.target.id === d.id) ? "black" : "#999")
+                    .attr("stroke-width", l => ((l.source.id === d.id || l.target.id === d.id) ? 2 * linkWidthScale(l.length) : linkWidthScale(l.length)));
+                callout.style("opacity", 1);
+            }
         })
         .on("mouseout", d => {
-            avatars.attr("filter", "");
-            link.style("stroke", "#999")
-                .attr("stroke-width", d => (linkWidthScale(d.length)));
-            callout.style("opacity", 0);
+            if (window.graphActive) {
+                avatars.attr("filter", "");
+                link.style("stroke", "#999")
+                    .attr("stroke-width", d => (linkWidthScale(d.length)));
+                callout.style("opacity", 0);
+            }
         })
         .on("mousemove", d => {
-            callout.html(`${d.id}</br>${d.team}</br>${d.start}`)
-            .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
-            .style("top", `${d3.event.pageY+40}px`)
+            if (window.graphActive) {
+                callout.html(`${d.id}</br>${d.team}</br>${d.start}`)
+                .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
+                .style("top", `${d3.event.pageY+40}px`)
+            }
         });
 });

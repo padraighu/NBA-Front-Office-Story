@@ -31,6 +31,10 @@
         padding-right: 0.2%;
     }
 
+    article {
+        overflow: auto;
+    }
+
     .step p, h3 {
         color: white;
     }
@@ -56,6 +60,10 @@
         transition: opacity 1s ease-in-out;
         /* transition: background-image 1s ease-in-out; */
     }
+
+    /* article {
+        position: relative;
+    } */
     </style>
 </head>
 <body>
@@ -64,80 +72,109 @@
     <img class="bg" id="griffin-james" src="./assets/539693808.jpg.0.webp" style="opacity: 0;">
     <img class="bg" id="buford-marks-lindsey" src="./assets/7036285.jpg" style="opacity: 0;">
     <img class="bg" id="buford-presti" src="./assets/image.webp" style="opacity: 0;">
+    <img class="bg" id="buford-pritchard" src="./assets/1988kansas.jpg" style="opacity: 0;">
     <img class="bg" id="pritchard-presti" src="./assets/180126-durant-oden.jpg" style="opacity: 0;">
     <img class="bg" id="kupchak-riley" src="./assets/season_1985_1986.jpg" style="opacity: 0;">
-    <div id="timeline"></div>
-    <div id="graph"></div>
-    <div class="step">
-        <p>
-            This is a paragraph to expain the graph...
-        </p>
-    </div>
-    <div class="step" id="suns-intro">
-        <p>
-            Let us take a closer look at some specific connections between GMs that have interesting background stories.
-            For instance, the connections between Danny Ainge, Donn Nelson and David Griffin, who were colleagues at the Phoenix Suns in the 90s. 
-        </p>
-    </div>
-    <div class="step" id="ainge-nelson-p">
-        <h3>Sunny Days</h3>
-        <p>
-            Danny Ainge, who played his last 3 years of NBA career at the Phoenix Suns, became head coach for the Suns in 1996.
-            Donn Nelson was one of Ainge's assistant coaches, until he left the Suns for the Mavericks in 1998, rejoining his father Don Nelson.
-            Ainge resigned from the Suns in 1999, and became GM for the Celtics in 2003. Nelson became GM for the Mavs in 2003.
-            <br>In 2014, Ainge traded all star point guard Rajon Rondo to Nelson's Mavs, which hoped the addition of Rondo would assist Mav's aging star Nowitzki in another playoffs push.
-        </p>
-    </div>
-    <div class="step" id="griffin-suns-p">
-        <p>
-            Also working at the Suns in the mid 90s was a young man named David Griffin, who just finished college at ASU.
-            Griffin started as a media intern, but moved to basketbal operations in 1997, working tasks typical for junior guys in an NBA front office such as editing videos and player evaluation.
-            Griffin worked for the Suns for 17 seasons, promoted to Senior Vice President of Basketball Operations in 2007. He joined the Cavaliers in 2010.
-        </p>
-    </div>
-    <div class="step" id="griffin-james-p">
-        <p>
-            Griffin would eventually become GM for the Cavaliers. 
-            In 2014, Cavaliers emerged as a possible destination for free agent Lebron James, whose all-star prowess would make any team an immediate contender.
-            To sign James with a max contract, however, Cavs would need to find ways to clear enough cap space by trading away existing players on their roster.
-            Griffin found a willing partner in Ainge's Celtics, who swallowed Tyler Zeller's and Marcus Thorton's contracts in a 3 way trade between Cavs, Celtics and Nets.
-            Two days after the trade, the Cavaliers, now with enough cap space, signed Lebron James.
-            <br>James would led the Cavs to win the franchise's first NBA championship in 2016.
-        </p>
-    </div>
-    <div class="step" id="spurs-intro">
-        <p>
-            Next, let's look at the 5 GMs in the league who shared a common background in being a San Antonio Spurs product. 
-        </p>
-    </div>
-    <div class="step" id="buford-marks-lindsey-p">
-        <h3>Remember the Alamo</h3>
-        <p>
-            The San Antonio Spurs, headed by GM R.C. Buford and coach Gregg Popovich, is the most consistently successful organization since the 2000s.
-            For this reason, people who haved worked under Buford and Popovich are hot commodities in the NBA job market, highly sought after by teams hungry for the secret formula of Spurs' success.
-            Among them were Dennis Lindsey and Sean Marks. Lindsey joined the Spurs front office in 2007, after working at the Rockets for 11 years. The Utah Jazz poached Lindsey in 2012, hiring him as the new GM. 
-            Marks played for the Spurs from 2003 to 2006, and rejoined the organization's basketball operations department in 2011 after retiring.
-            Marks would join the Brooklyn Nets in 2016.
-        </p>
-    </div>
-    <div class="step" id="buford-presti-p">
-        <p>Remember the Alamo<br>
-        </p>
-    </div>
-    <div class="step" id="pritchard-presti-p">
-        <p>Remember the Alamo<br>
-        </p>
-    </div>
-    <div class="step" id="kupchak-riley-p">
-        <h3>Lake Show</h3>
-        <p>
-            Before overseeing the Lakers that dominated the league during the start and the end of the 2000s, Mitch Kupchak was himself a player of the Showtime Lakers in the 80s. 
-            Kupchak was coached by Pat Riley, before retiring and joining the Lakers front office under Jerry West. 
-            After his success at LA, Riley coached the Knicks, then eventually taking over the Miami Heat as both GM and head coach in 1995. 
-            In 2004, when Lakers star Shaquille O'Neal demanded a trade, Kupchak traded O'Neal to Riley's Heat. The Heat and O'Neal would win championship in 2006.
-            <br>Kupchak was fired by Lakers owner Jeanie Buss in 2017. Replacing him was another Showtime member, Magic Johnson, who was replaced by Rob Pelinka in 2019.
-        </p>
-    </div>
-    <div id="profiles"></div>
+    <section>
+        <div id="timeline"></div>
+    </section>
+    <section>
+        <div id="graph"></div>
+        <article>
+            <div class="step">
+                <p>
+                    This is a paragraph to expain the graph...
+                </p>
+            </div>
+            <div class="step" id="suns-intro">
+                <p>
+                    Let us take a closer look at some specific connections between GMs that have interesting background stories.
+                    For instance, the connections between Danny Ainge, Donn Nelson and David Griffin, who all worked at the Phoenix Suns in the 90s. 
+                </p>
+            </div>
+            <div class="step" id="ainge-nelson-p">
+                <h3>Sunny Days</h3>
+                <p>
+                    Danny Ainge, who played his last 3 years of NBA career at the Phoenix Suns, became head coach of the Suns in 1996.
+                    Donn Nelson was one of Ainge's assistant coaches, until he left the Suns for the Mavericks in 1998, rejoining his father Don Nelson.
+                    Ainge resigned from the Suns in 1999, and became GM for the Celtics in 2003. Nelson became GM for the Mavs, also in 2003.
+                    <br>In 2014, Ainge traded all star point guard Rajon Rondo to Nelson's Mavs, whose hope was that the addition of Rondo would assist Mav's aging star Nowitzki in another playoffs push.
+                </p>
+            </div>
+            <div class="step" id="griffin-suns-p">
+                <p>
+                    Also working at the Suns in the mid 90s was a young man named David Griffin, who joined the organization after graduating from Arizona State University.
+                    Griffin started as a media intern, but moved to basketbal operations in 1997, working tasks typical for junior guys in an NBA front office such as editing videos and player evaluation.
+                    Griffin worked for the Suns for 17 seasons and was promoted to Senior Vice President of Basketball Operations in 2007. He joined the Cavaliers in 2010.
+                </p>
+            </div>
+            <div class="step" id="griffin-james-p">
+                <p>
+                    Griffin would eventually become GM for the Cavaliers. 
+                    In 2014, Cavaliers emerged as a possible destination for free agent Lebron James, whose all-star prowess would make any team an immediate contender.
+                    To sign James with a max contract, however, Cavs would need to find ways to clear enough cap space by trading away existing players on their roster.
+                    Griffin found a willing partner in Ainge's Celtics, who swallowed Tyler Zeller's and Marcus Thorton's contracts in a 3 way trade between Cavs, Celtics and Nets.
+                    Two days after the trade, the Cavaliers, now with enough cap space, signed Lebron James.
+                    <br>James would led the Cavs to win the franchise's first NBA championship in 2016.
+                </p>
+            </div>
+            <div class="step" id="spurs-intro">
+                <p>
+                    Next, let's look at the 5 GMs in the league with connections to the San Antonio Spurs. 
+                </p>
+            </div>
+            <div class="step" id="buford-marks-lindsey-p">
+                <h3>Remember the Alamo</h3>
+                <p>
+                    The San Antonio Spurs, headed by the longtime duo GM R.C. Buford and coach Gregg Popovich, is the most consistently successful organization since the 2000s.
+                    For this reason, people who haved worked under Buford and Popovich are hot commodities in the NBA job market, highly sought after by teams hungry for the secret formula of Spurs' success.
+                    Among them were Dennis Lindsey and Sean Marks. Lindsey joined the Spurs front office in 2007, after working at the Rockets for 11 years. The Utah Jazz poached Lindsey in 2012, hiring him as the new GM. 
+                    Marks played for the Spurs from 2003 to 2006, and rejoined the organization's basketball operations department in 2011 after retiring.
+                    Marks would join the Brooklyn Nets as GM in 2016.
+                </p>
+            </div>
+            <div class="step" id="buford-presti-p">
+                <p>
+                    The other two Spurs alum, Sam Presti and Kevin Pritchard, graduated from an earlier cohort in the 2000s.
+                    Presti started as a video intern working for Popovich in 2000, and gradually took on more responsibilities under Buford. 
+                    He was instrumental in the team's selection of Tony Parker in the 2001 draft. 
+                    <br>In 2007 Presti became GM of the Supersonics to oversee its rebuilding effort. He drafted 3 future MVPs in Durant, Westbrook and Harden. 
+                    The Spurs and the Thunder clashed thrice in the playoffs in 2012, 2014 and 2016. Presti's Thunder held a 2-1 record over the Spurs. 
+                </p>
+            </div>
+            <div class="step" id="buford-pritchard-p">
+                <p>
+                    Kevin Pritchard was hired by Buford to work as a scout for the Spurs from 2001 to 2003, but he had already known Popovich and Buford since a decade ago. 
+                    Pritchard was a college player at the Kansas Jayhawks from 1986 to 1990, during which the team had won the NCAA championship in 1988.
+                    Popovich and Buford at the time worked in Kansas' coaching staff under Larry Brown.
+                </p>
+            </div>
+            <div class="step" id="pritchard-presti-p">
+                <p>
+                    Coincidentally, in the 2007 draft Pritchard and Presti held the No.1 and No.2 picks for the Trailblazers and the Supersonics (now named the Thunder), respectively.
+                    Pritchard selected Greg Oden to the Trailblazers while Presti drafted Kevin Durant to the Supersonics.
+                    <br>10 years later, Pritchard, now in charge of the Indiana Pacers, sent discontent star forward Paul George to Presti's Thunder to become co-star of Russell Westbrook, a role left empty by Durant, who left Oklahoma for Golden State 1 year ago. 
+                </p>
+            </div>
+            <div class="step" id="lakers-intro">
+                <p>
+                    Finally, let's turn our attention to the 2 GMs who managed the Lakers before. 
+                </p>
+            </div>
+            <div class="step" id="kupchak-riley-p">
+                <h3>Lake Show</h3>
+                <p>
+                    Before overseeing the Lakers that dominated the league during the start and the end of the 2000s, Mitch Kupchak was himself a player of the Showtime Lakers in the 80s. 
+                    Kupchak was coached by Pat Riley, before retiring and joining the Lakers front office under Jerry West. 
+                    After his success at LA, Riley coached the Knicks, then eventually taking over the Miami Heat as both GM and head coach in 1995. 
+                    In 2004, when Lakers star Shaquille O'Neal demanded a trade, Kupchak traded O'Neal to Riley's Heat. The Heat and O'Neal would win championship in 2006.
+                    <br>Kupchak was fired by Lakers owner Jeanie Buss in 2017. Replacing him was another Showtime member, Magic Johnson, who was replaced by Rob Pelinka in 2019.
+                </p>
+            </div>
+        </article>
+    </section>
+    <section>
+        <div id="profiles"></div>
+    </section>
 </body>
 </html>
