@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", e => {
         8: "buford-pritchard",
         9: "pritchard-presti",
         10: "lakers-intro",
-        11: "kupchak-riley"
+        11: "kupchak-riley",
+        12: "graph-conclude"
     };
     const allBackground = [
         "ainge-nelson",
@@ -188,6 +189,11 @@ document.addEventListener("DOMContentLoaded", e => {
                         d3.select("#"+b)
                             .style("opacity", 0);
                     });
+            }
+            if (currentStep == "graph-conclude" && response.direction == "down") {
+                console.log("conclude");
+                d3.select("#graph-conclude").transition().style("opacity", 0);
+                d3.select("#graph-canary").transition().style("opacity", 0);
             }
         });
     
