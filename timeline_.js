@@ -1,6 +1,22 @@
 import dat from "./data/gms.json";
 
- document.addEventListener("DOMContentLoaded", () => {
+var dots;
+var lines;
+var bars;
+var y;
+var y2;
+var countScale;
+var bins;
+var dateScale;
+var dates;
+var minDate;
+var maxDate;
+var bars;
+var callout;
+var gmScale;
+var divider;
+
+export function setUpTimeline() {
     const svg = d3.select("#timeline")
         .append("svg")
         .attr("viewBox", "0 0 1500 800");
@@ -12,19 +28,19 @@ import dat from "./data/gms.json";
     dat.sort((a, b) => ((a["Current Start Date"] - b["Current Start Date"])));
 
 
-    const dates = dat.map(d => d["Current Start Date"]);
-    const maxDate = new Date(Math.max.apply(null, dates));
+    dates = dat.map(d => d["Current Start Date"]);
+    maxDate = new Date(Math.max.apply(null, dates));
 
-    const minDate = new Date(Math.min.apply(null, dates));
+    minDate = new Date(Math.min.apply(null, dates));
 
 
-    const dateScale = d3.scaleTime()
+    dateScale = d3.scaleTime()
         .domain([minDate, maxDate])
         .range([0, 1000]);
 
     const xAxis = d3.axisBottom(dateScale);
 
-    const gmScale = d3.scaleBand()
+    gmScale = d3.scaleBand()
         .domain(dat.map(d => d["Name"]))
         .range([0, 500]).padding(1).round(true);
 
@@ -34,23 +50,24 @@ import dat from "./data/gms.json";
         .attr("transform", `translate(0, 500)`)
         .call(xAxis);
 
-    const y = svg.append("g")
+    y = svg.append("g")
         .attr("transform", `translate(1000, 0)`)
+        .attr("id", "y")
         .call(yAxis);
 
-    const bins = d3.histogram()
+    bins = d3.histogram()
         .value(d => d["Current Start Date"])
         .domain(dateScale.domain())
         .thresholds(d3.thresholdFreedmanDiaconis(dates, minDate, maxDate))(dat);//.thresholds()
 
 
-    const countScale = d3.scaleLinear()
+    countScale = d3.scaleLinear()
         .domain([0, d3.max(bins, d => d.length)])
         .range([500, 0]);
 
     const yAxis2 = d3.axisRight(countScale);
 
-    const bars = svg.append("g")
+    bars = svg.append("g")
         .selectAll("rect")
         .data(bins)
         .join("rect")
@@ -61,14 +78,13 @@ import dat from "./data/gms.json";
         // .attr("height", d => (500-countScale(d.length)))
         .attr("height", 500-countScale(0))
         .style("fill", "#69b3a2");
-
-
     
-    const y2 = svg.append("g")
+    y2 = svg.append("g")
         .call(yAxis2)
+        .attr("id", "y2")
         .style("opacity", 0);
 
-    const lines = svg.append("g")
+    lines = svg.append("g")
         .selectAll("line")
         .data(dat)
         .join("line")
@@ -77,7 +93,7 @@ import dat from "./data/gms.json";
         .attr("y1", d => (gmScale(d["Name"])+0.5))
         .attr("y2", d => (gmScale(d["Name"])+0.5))
         .attr("stroke", "gray");
-    const dots = svg.append("g")
+    dots = svg.append("g")
             .selectAll("circle")
             .data(dat)
             .join("circle")
@@ -87,28 +103,6 @@ import dat from "./data/gms.json";
             .attr("r", 5)
             .attr("fill", "green")
             .attr("stroke", "black");
-    // dots.transition()
-    //     .delay(2000)
-    //     .attr("cy", 500);
-    // lines.transition()
-    //     .delay(2000)
-    //     .style("opacity", 0);
-    // y.transition()
-    //     .delay(2000)
-    //     .style("opacity", 0);
-    // y2.transition()
-    //     .delay(3000)
-    //     .style("opacity", 1);
-
-    // dots.transition()
-    //     //.duration(5000)
-    //     .delay(3000)
-    //     .style("opacity", 0);
-    // bars.transition()
-    //     //.duration(800)
-    //     .delay(3000)
-    //     .attr("height", d => (500-countScale(d.length)))
-    //     .attr("y", d => countScale(d.length));
 
     const focus = dat.find(d => d["Name"] === "Jeff Weltman")
     const annotations = [{
@@ -117,7 +111,7 @@ import dat from "./data/gms.json";
         },
         data: focus,
         dy: 100,
-        dx: -100,
+        dx: -70,
         subject: {
             width: 25,
             height: 100
@@ -130,10 +124,100 @@ import dat from "./data/gms.json";
             x: d => (dateScale(d["Current Start Date"])-8),
             y: d => (gmScale(d["Name"])-8)
         })
-        // .accessorsInverse({
-        // })
         .annotations(annotations);
-    svg
+
+    const lineDivide = [{
+        note: {
+            label: "Few GMs stand the test of time; the majority start their current jobs in the 2010s"
+        },
+        data: dat.find(d => d["Name"] === "Gar Forman"),
+        dy: 150,
+        dx: -30,
+        subject: {
+            width: 1,
+            height: 450
+        }
+    }];
+
+    const makeLine = d3.annotation()
+        .type(d3.annotationCalloutRect)
+        .accessors({
+            x: d => (dateScale(d["Current Start Date"])+77),
+            y: d => (gmScale(d["Name"])-50)
+        })
+        .annotations(lineDivide);
+
+    divider = svg
+        .append("g")
+        .call(makeLine)
+        .attr("opacity", 0);
+    
+    callout = svg
         .append("g")
         .call(makeAnnotations);
- });
+ }
+
+ export function lollipopToHistogram() {
+    callout.transition()
+        // .delay(500)
+        .style("opacity", 0);
+    divider.transition()
+        .delay(500)
+        .style("opacity", 1);
+
+    dots.transition()
+        // .delay(1000)
+        .attr("cy", 500);
+    lines.transition()
+        // .delay(1000)
+        .style("opacity", 0);
+    y.transition()
+        // .delay(1000)
+        .style("opacity", 0);
+    y2.transition()
+        .delay(500)
+        .style("opacity", 1);
+
+    dots.transition()
+        .delay(500)
+        .style("opacity", 0);
+    bars.transition()
+        .delay(500)
+        .attr("height", d => (500-countScale(d.length)))
+        .attr("y", d => countScale(d.length));
+}
+
+export function histogramToLollipop() {
+    callout.transition()
+        .delay(500)
+        .style("opacity", 1);
+    divider.transition()
+        .style("opacity", 0);
+
+    y2.transition()
+        // .delay(2000)
+        .style("opacity", 0);
+
+    bars.transition()
+        //.duration(800)
+        // .delay(2000)
+        .attr("height", d => 500-countScale(0))
+        .attr("y", d => countScale(0));
+
+    dots.transition()
+        //.duration(5000)
+        // .delay(2000)
+        .style("opacity", 1);
+
+    dots.transition()
+        .delay(500)
+        .attr("cx", d => (dateScale(d["Current Start Date"])))
+        .attr("cy", d => (gmScale(d["Name"])));
+
+    lines.transition()
+        .delay(500)
+        .style("opacity", 1);
+    y.transition()
+        .delay(500)
+        .style("opacity", 1);
+}

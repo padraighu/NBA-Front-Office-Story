@@ -1,3 +1,5 @@
+import { lollipopToHistogram, setUpTimeline, histogramToLollipop } from "./timeline_.js"
+
 window.graphActive = false;
 
 function resetGraph() {
@@ -19,20 +21,23 @@ function enableGraph() {
 }
 
 document.addEventListener("DOMContentLoaded", e => {
+    setUpTimeline();
     const scroller = scrollama();
     const steps = {
-        1: "suns-intro",
-        2: "ainge-nelson",
-        3: "griffin-suns",
-        4: "griffin-james",
-        5: "spurs-intro",
-        6: "buford-marks-lindsey",
-        7: "buford-presti",
-        8: "buford-pritchard",
-        9: "pritchard-presti",
-        10: "lakers-intro",
-        11: "kupchak-riley",
-        12: "graph-conclude"
+        0: "step1",
+        1: "step2",
+        3: "suns-intro",
+        4: "ainge-nelson",
+        5: "griffin-suns",
+        6: "griffin-james",
+        7: "spurs-intro",
+        8: "buford-marks-lindsey",
+        9: "buford-presti",
+        10: "buford-pritchard",
+        11: "pritchard-presti",
+        12: "lakers-intro",
+        13: "kupchak-riley",
+        14: "graph-conclude"
     };
     const allBackground = [
         "ainge-nelson",
@@ -60,6 +65,13 @@ document.addEventListener("DOMContentLoaded", e => {
                     d3.select("#"+b)
                         .style("opacity", 0);
                 });
+            if (currentStep == "step2") {
+                if (response.direction == "down")
+                    lollipopToHistogram();
+            }
+            if (currentStep == "step1" && response.direction == "up") {
+                histogramToLollipop();
+            }
             if (currentStep == "ainge-nelson" && response.direction == "down") {
                 d3.select("#graph").select("svg").transition()
                     .attr("opacity", 0);
