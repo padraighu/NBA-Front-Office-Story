@@ -15,11 +15,15 @@ var bars;
 var callout;
 var gmScale;
 var divider;
+var gmHighlight;
+
+const width = 1200;
+const height = 800;
 
 export function setUpTimeline() {
     const svg = d3.select("#timeline")
         .append("svg")
-        .attr("viewBox", "0 0 1500 800");
+        .attr("viewBox", `-10 -10 ${width} ${height}`);
 
    dat.forEach(d => {
       d["Current Start Date"] = Date.parse(d["Current Start Date"]);
@@ -104,10 +108,10 @@ export function setUpTimeline() {
             .attr("fill", "green")
             .attr("stroke", "black");
 
-    const focus = dat.find(d => d["Name"] === "Jeff Weltman")
+    const focus = dat.find(d => d["Name"] === "Jeff Weltman");
     const annotations = [{
         note: {
-            label: "Recruiting seasons often happen immediately after regular season ends."
+            label: "Recruiting seasons often happen immediately after regular season ends"
         },
         data: focus,
         dy: 100,
@@ -147,6 +151,27 @@ export function setUpTimeline() {
         })
         .annotations(lineDivide);
 
+    const topGMs = [{
+        note: {
+            label: "13 championships won"
+        },
+        dx: -50,
+        dy: -5,
+        data: dat.find(d => d["Name"] === "Pat Riley"),
+        subject: {
+            width: 65,
+            height: 125
+        }
+    }]
+
+    const highlightGMs = d3.annotation()
+        .type(d3.annotationCalloutRect)
+        .accessors({
+            x: d => 1005,
+            y: d => gmScale(d["Name"])-5
+        })
+        .annotations(topGMs);
+
     divider = svg
         .append("g")
         .call(makeLine)
@@ -155,6 +180,9 @@ export function setUpTimeline() {
     callout = svg
         .append("g")
         .call(makeAnnotations);
+
+    gmHighlight = svg.append("g")
+        .call(highlightGMs);
  }
 
  export function lollipopToHistogram() {
@@ -164,6 +192,8 @@ export function setUpTimeline() {
     divider.transition()
         .delay(500)
         .style("opacity", 1);
+    gmHighlight.transition()
+        .style("opacity", 0);
 
     dots.transition()
         // .delay(1000)
@@ -193,6 +223,9 @@ export function histogramToLollipop() {
         .style("opacity", 1);
     divider.transition()
         .style("opacity", 0);
+    gmHighlight.transition()
+        .delay(500)
+        .style("opacity", 1);
 
     y2.transition()
         // .delay(2000)
