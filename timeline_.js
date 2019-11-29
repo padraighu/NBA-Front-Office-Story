@@ -17,8 +17,12 @@ var gmScale;
 var divider;
 var gmHighlight;
 
+
 const width = 1200;
 const height = 800;
+const margin = {
+    top: 0, bottom: 0, right: 30, left: 30
+};
 
 export function setUpTimeline() {
     const svg = d3.select("#timeline")
@@ -37,10 +41,9 @@ export function setUpTimeline() {
 
     minDate = new Date(Math.min.apply(null, dates));
 
-
     dateScale = d3.scaleTime()
         .domain([minDate, maxDate])
-        .range([0, 1000]);
+        .range([margin.left, 1000]);
 
     const xAxis = d3.axisBottom(dateScale);
 
@@ -69,7 +72,7 @@ export function setUpTimeline() {
         .domain([0, d3.max(bins, d => d.length)])
         .range([500, 0]);
 
-    const yAxis2 = d3.axisRight(countScale);
+    const yAxis2 = d3.axisLeft(countScale);
 
     bars = svg.append("g")
         .selectAll("rect")
@@ -83,7 +86,8 @@ export function setUpTimeline() {
         .attr("height", 500-countScale(0))
         .style("fill", "#69b3a2");
     
-    y2 = svg.append("g")
+    y2 = svg.append("g")        
+        .attr("transform", `translate(${margin.left}, 0)`)
         .call(yAxis2)
         .attr("id", "y2")
         .style("opacity", 0);
