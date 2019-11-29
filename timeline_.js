@@ -143,15 +143,15 @@ export function setUpTimeline() {
         dx: -30,
         subject: {
             width: 1,
-            height: 450
+            height: 540
         }
     }];
 
     const makeLine = d3.annotation()
         .type(d3.annotationCalloutRect)
         .accessors({
-            x: d => (dateScale(d["Current Start Date"])+77),
-            y: d => (gmScale(d["Name"])-50)
+            x: d => (dateScale(d["Current Start Date"])+74),
+            y: d => (gmScale(d["Name"])-120)
         })
         .annotations(lineDivide);
 
