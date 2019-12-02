@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", e => {
         "buford-presti",
         "buford-pritchard",
         "pritchard-presti",
-        "kupchak-riley"];
+        "kupchak-riley"
+    ];
     
     scroller
         .setup({

@@ -97,9 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .text(f.text);
     });
 
+    dat.forEach(d => {
+      d["Current Start Date"] = new Date(Date.parse(d["Current Start Date"]));
+    });
+
     const svg = d3.select("#profiles")
     .append("svg")
-    .attr("viewBox", "0 0 1500 800");
+    .attr("viewBox", "0 0 1000 800");
 
     const defs = svg.append('svg:defs');
 
@@ -155,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
        callout.style("opacity", 1);
     })
     .on("mousemove", d => {
-      // console.log(`${d3.event.pageX} ${d3.event.pageY}`);
-      callout.html(`${d.Name}</br>${d.Team}</br>${d["Current Start Date"]}`)
+      // console.log(`callout ${d3.event.pageX} ${d3.event.pageY}`);
+      callout.html(`${d.Name}</br>GM of ${d.Team}</br>since ${d["Current Start Date"].getFullYear()}`)
       .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
       .style("top", `${d3.event.pageY+40}px`) //`${d3.event.pageY}px` "500px"
     })
