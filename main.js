@@ -23,22 +23,6 @@ function enableGraph() {
 document.addEventListener("DOMContentLoaded", e => {
     setUpTimeline();
     const scroller = scrollama();
-    const steps = {
-        0: "step1",
-        1: "step2",
-        3: "suns-intro",
-        4: "ainge-nelson",
-        5: "griffin-suns",
-        6: "griffin-james",
-        7: "spurs-intro",
-        8: "buford-marks-lindsey",
-        9: "buford-presti",
-        10: "buford-pritchard",
-        11: "pritchard-presti",
-        12: "lakers-intro",
-        13: "kupchak-riley",
-        14: "graph-conclude"
-    };
     const allBackground = [
         "ainge-nelson",
         "griffin-suns", 
@@ -50,6 +34,7 @@ document.addEventListener("DOMContentLoaded", e => {
         "kupchak-riley"
     ];
     
+    const suffix = /-p$/;
     scroller
         .setup({
             step: ".step",
@@ -58,9 +43,12 @@ document.addEventListener("DOMContentLoaded", e => {
         })
         .onStepEnter(response => {
             console.log(response);
-            let currentStep = steps[response.index];
-            d3.select("#"+currentStep)
-                .style("opacity", 1);
+            let currentStep = response.element.id.replace(suffix, ""); 
+            console.log(currentStep);
+            if (currentStep != "graph-canary") {
+                d3.select("#"+currentStep)
+                    .style("opacity", 1);
+            }
             allBackground.filter(b => b != currentStep)
                 .forEach(b => {
                     d3.select("#"+b)
@@ -178,7 +166,7 @@ document.addEventListener("DOMContentLoaded", e => {
             }
         })
         .onStepExit(response => {
-            let currentStep = steps[response.index];
+            let currentStep = response.element.id.replace(suffix, "");
             if (currentStep == "kupchak-riley" && response.direction == "down") {
                 allBackground
                     .forEach(b => {
