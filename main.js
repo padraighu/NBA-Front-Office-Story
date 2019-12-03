@@ -20,6 +20,11 @@ function enableGraph() {
     window.graphActive = true;
 }
 
+function updateProfiles(val){
+    window.filterProfiles(val);
+    document.querySelector(`#filter [value="${val}"]`).selected = true;
+}
+
 document.addEventListener("DOMContentLoaded", e => {
     setUpTimeline();
     const scroller = scrollama();
@@ -54,11 +59,23 @@ document.addEventListener("DOMContentLoaded", e => {
                     d3.select("#"+b)
                         .style("opacity", 0);
                 });
-            if (currentStep == "step2") {
+            if (currentStep == "profiles-college") {
+                updateProfiles("Ex College Player");
+            }
+            if (currentStep == "profiles-nba") {
+                updateProfiles("Ex NBA Player");
+            }
+            if (currentStep == "profiles-scout") {
+                updateProfiles("Ex Scout");
+            }
+            if (currentStep == "profiles-internal") {
+                updateProfiles("Promoted");
+            }
+            if (currentStep == "timeline-histogram") {
                 if (response.direction == "down")
                     lollipopToHistogram();
             }
-            if (currentStep == "step1" && response.direction == "up") {
+            if (currentStep == "timeline-lollipop" && response.direction == "up") {
                 histogramToLollipop();
             }
             if (currentStep == "ainge-nelson" && response.direction == "down") {
