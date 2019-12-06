@@ -1,3 +1,4 @@
 .cache
 archive
 dist
+data/*.json
