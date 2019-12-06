@@ -1,4 +1,4 @@
-import { lollipopToHistogram, setUpTimeline, histogramToLollipop } from "./timeline_.js"
+import { lollipopToHistogram, setUpTimeline, histogramToLollipop } from "./timeline.js"
 
 window.graphActive = false;
 
