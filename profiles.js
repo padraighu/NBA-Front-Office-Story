@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .attr("width", 60)
     .attr("border-radius", "50%")
     .attr("filter", "url(#gray)")
-    .attr("opacity", d => (d["Ex NBA Player"]["val"] == true ? 0 : 1))
+    .attr("opacity", 0)
     .on("mouseover", d => {
       //  console.log(`${d.Team} ${d.Name}`);
       //  console.log(d);
@@ -169,13 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     profiles.transition()
-    .attr("transform", d => `translate(${d["Ex NBA Player"]["x"]}, ${d["Ex NBA Player"]["y"]})`);
+    .attr("transform", d => `translate(${d["Init"]["x"]}, ${d["Init"]["y"]})`);
    profile_images.transition()
-    .attr("transform", d => `translate(${d["Ex NBA Player"]["x"]-30}, ${d["Ex NBA Player"]["y"]-30})`);
+    .attr("transform", d => `translate(${d["Init"]["x"]-30}, ${d["Init"]["y"]-30})`);
    profile_images_gray.transition()
-    .attr("transform", d => `translate(${d["Ex NBA Player"]["x"]-30}, ${d["Ex NBA Player"]["y"]-30})`);
+    .attr("transform", d => `translate(${d["Init"]["x"]-30}, ${d["Init"]["y"]-30})`);
 
-    const gmCount = dat.filter(d => (d["Ex NBA Player"]["val"]==true)).length;
+    const gmCount = dat.filter(d => (d["Init"]["val"]==true)).length;
     d3.select("#count")
     .text(gmCount);
 

@@ -60,6 +60,9 @@ document.addEventListener("DOMContentLoaded", e => {
                         .style("opacity", 0);
                 });
             if (currentStep == "profiles-college") {
+                d3.select("#selector")
+                    .transition()
+                    .style("opacity", 1);
                 updateProfiles("Ex College Player");
             }
             if (currentStep == "profiles-nba") {

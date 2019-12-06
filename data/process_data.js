@@ -45,5 +45,11 @@ filters.forEach((f) => {
       }
    });
 });
+let x = 0, y = 0;
+gms.forEach((d) => {
+  d["Init"] = {"val": true, "x": 350 + 65 * (x % 6), "y": 100 + 65 * y};
+  x++;
+  if (x % 6 == 0) y++;
+});
 fs.writeFileSync(path.join(__dirname, "../data/gms.json"), JSON.stringify(gms));
 console.log("done");
