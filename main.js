@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", e => {
             console.log(response);
             let currentStep = response.element.id.replace(suffix, ""); 
             console.log(currentStep);
-            if (currentStep != "graph-canary") {
+            if (currentStep != "graph-canary" && currentStep != "profiles-canary") {
                 d3.select("#"+currentStep)
                     .style("opacity", 1);
             }
@@ -206,9 +206,12 @@ document.addEventListener("DOMContentLoaded", e => {
                     });
             }
             if (currentStep == "graph-conclude" && response.direction == "down") {
-                console.log("conclude");
                 d3.select("#graph-conclude").transition().style("opacity", 0);
                 d3.select("#graph-canary").transition().style("opacity", 0);
+            }
+            if (currentStep == "profiles-conclude" && response.direction == "down") {
+                d3.select("#profiles-conclude").transition().style("opacity", 0);
+                d3.select("#profiles-canary").transition().style("opacity", 0);
             }
         });
     
