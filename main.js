@@ -68,9 +68,6 @@ document.addEventListener("DOMContentLoaded", e => {
             if (currentStep == "profiles-scout") {
                 updateProfiles("Ex Scout");
             }
-            if (currentStep == "profiles-internal") {
-                updateProfiles("Promoted");
-            }
             if (currentStep == "timeline-histogram") {
                 if (response.direction == "down")
                     lollipopToHistogram();

@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {value: "Ex Video", text: "edited video for an NBA team"},
       {value: "MBA", text: "held an MBA degree"},
       {value: "JD", text: "held a JD degree"},
-      {value: "Promoted", text: "were internally promoted to current position"},
+      {value: "Promoted", text: "were internally promoted to current positions"},
       {value: "Sloan", text: "attended the Sloan Sports Analytics Conference in the past"}
     ];
 
