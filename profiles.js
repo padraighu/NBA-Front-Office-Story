@@ -67,11 +67,11 @@ window.filterProfiles = (val) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    d3.select("#profiles")
+    d3.select("#selector")
       .append("a")
       .html("<b id=\"count\"></b> out of <b>30</b> (<b id=\"percentage\"></b>) NBA GMs ");
 
-    d3.select("#profiles")
+    d3.select("#selector")
       .append("select")
       .attr("id", "filter")
       .attr("onchange", "filterProfiles(this.value)");
