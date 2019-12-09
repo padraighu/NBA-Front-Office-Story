@@ -2,10 +2,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const gms = JSON.parse(fs.readFileSync(path.join(__dirname, "../analysis/gms.json"), "utf8"));
+const gms = JSON.parse(fs.readFileSync(path.join(__dirname, "gms_staging.json"), "utf8"));
 const gmPos = JSON.parse(fs.readFileSync(path.join(__dirname, "../graph_pos.json"), "utf8"));
-const links = JSON.parse(fs.readFileSync(path.join(__dirname, "../analysis/links.json"), "utf8"));
-const nodes = JSON.parse(fs.readFileSync(path.join(__dirname, "../analysis/nodes.json"), "utf8"));
+const links = JSON.parse(fs.readFileSync(path.join(__dirname, "links_staging.json"), "utf8"));
+const nodes = JSON.parse(fs.readFileSync(path.join(__dirname, "nodes_staging.json"), "utf8"));
 
 console.log("graph data...");
 nodes.forEach(n => {
@@ -20,8 +20,8 @@ links.forEach(l => {
     l.source = nodes.find(n => n.id === l.source);
     l.target = nodes.find(n => n.id === l.target);
 });
-fs.writeFileSync(path.join(__dirname, "../data/nodes.json"), JSON.stringify(nodes));
-fs.writeFileSync(path.join(__dirname, "../data/links.json"), JSON.stringify(links));
+fs.writeFileSync(path.join(__dirname, "nodes.json"), JSON.stringify(nodes));
+fs.writeFileSync(path.join(__dirname, "links.json"), JSON.stringify(links));
 console.log("done");
 
 console.log("profile data...");
@@ -51,5 +51,5 @@ gms.forEach((d) => {
   x++;
   if (x % 6 == 0) y++;
 });
-fs.writeFileSync(path.join(__dirname, "../data/gms.json"), JSON.stringify(gms));
+fs.writeFileSync(path.join(__dirname, "gms.json"), JSON.stringify(gms));
 console.log("done");

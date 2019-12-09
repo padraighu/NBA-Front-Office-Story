@@ -2,7 +2,7 @@ library(tidyverse)
 library(jsonlite)
 library(lubridate)
 
-setwd('C:/Users/Yifei Hu/Desktop/nba-gm/analysis')
+setwd('C:/Users/Yifei Hu/Desktop/nba-gm/data')
 #dirname(rstudioapi::getActiveDocumentContext()$path)
 
 current_gms <- read_csv('Master.csv')
@@ -80,8 +80,6 @@ links <- gm2gm %>%
   mutate(duration=merge_int(duration)) %>% 
   rename(source=Source, target=Target, length=length_tot) 
 
-links %>% filter(length==0) %>% write_tsv('temp.txt')
-
 teams <- current_gms %>% pull(Team)
 nodes <- all %>% pull(Source) %>% union(all %>% pull(Target)) %>% unique()
 nodes <- data.frame(id=nodes) %>% 
@@ -103,8 +101,8 @@ links <- links %>%
   filter(!(length==0&source=='Tommy Sheppard'))
 
 # calculate degree
-links %>% write_json('links.json')
-nodes %>% write_json('nodes.json')
+links %>% write_json('links_staging.json')
+nodes %>% write_json('nodes_staging.json')
 
 current_gms %>% 
   mutate('Current Start Date'=ymd(`Current Start Date`)) %>% 
@@ -130,4 +128,4 @@ current_gms %>%
     ) %>% 
   filter_all(any_vars(!is.na(.))) %>%
   mutate(Picture=str_c(Picture, '_pfp.png', sep='')) %>% 
-  write_json("gms.json")
+  write_json("gms_staging.json")
