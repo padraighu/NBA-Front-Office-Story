@@ -160,7 +160,7 @@ export function setUpTimeline() {
             label: "13 championships won"
         },
         dx: -50,
-        dy: -5,
+        dy: -7,
         data: dat.find(d => d["Name"] === "Pat Riley"),
         subject: {
             width: 65,
