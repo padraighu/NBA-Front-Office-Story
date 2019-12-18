@@ -14,6 +14,13 @@ h1, #byline {
     text-align: center;
 }
 
+.intermission {
+    margin-left: 15%;
+    margin-right: 15%;
+    /* margin-top: 15%; */
+    margin-bottom: 15%;
+}
+
 .step {
     width: 50%;
     height: 30%;
