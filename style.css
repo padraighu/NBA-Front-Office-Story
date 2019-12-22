@@ -34,6 +34,10 @@ h1, #byline {
     padding-right: 0.2%;
 }
 
+.intermission, .step {
+    line-height: 150%;
+}
+
 .step #graph-canary {
     padding-bottom: 0%;
 }
