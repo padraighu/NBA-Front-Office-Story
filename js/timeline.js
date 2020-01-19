@@ -1,4 +1,4 @@
-import dat from "./data/gms.json";
+import dat from "../data/gms.json";
 
 var dots;
 var lines;

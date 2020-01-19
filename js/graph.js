@@ -1,6 +1,6 @@
-import pfps from "./assets/*.png";
-import links from "./analysis/links.json";
-import nodes from "./data/nodes.json";
+import pfps from "../assets/*.png";
+import links from "../analysis/links.json"; // TODO why analysis? 
+import nodes from "../data/nodes.json";
 
 var node1;
 var simulation;

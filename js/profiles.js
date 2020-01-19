@@ -1,6 +1,6 @@
-import pfps from "./assets/*.png";
+import pfps from "../assets/*.png";
 
-import dat from "./data/gms.json";
+import dat from "../data/gms.json";
 
 var profiles; 
 var profile_images;

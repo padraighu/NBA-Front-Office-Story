@@ -1,6 +1,6 @@
-import pfps from "./assets/*.png";
-import links from "./data/links.json";
-import nodes from "./data/nodes.json";
+import pfps from "../assets/*.png";
+import links from "../data/links.json";
+import nodes from "../data/nodes.json";
 
 document.addEventListener("DOMContentLoaded", e => {
     const width = 1400;
