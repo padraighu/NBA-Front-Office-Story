@@ -15,10 +15,13 @@ h1, #byline {
 }
 
 .intermission {
-    margin-left: 25%;
-    margin-right: 25%;
     /* margin-top: 15%; */
     margin-bottom: 15%;
+}
+
+.center {
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .step {
