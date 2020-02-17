@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", e => {
     const width = 1400;
     const height = 1000;
 
+    nodes.forEach(n => {
+        n.start = new Date(Date.parse(n.start));
+    });
+
     const svg = d3.select("#graph").append("svg")
         .attr("viewBox", [0, 0, width, height]);
 
@@ -57,7 +61,7 @@ document.addEventListener("DOMContentLoaded", e => {
         })        
         .on("mousemove", d => {
             if (window.graphActive) {
-                callout.html(`${d.team}</br>${d.duration}</br>${(d.length != 0) ? d.length : "< 1"} ${(d.length > 1) ? "years" : "year"}`)
+                callout.html(`Colleagues @ ${d.team}</br>during ${d.duration}</br>for ${(d.length != 0) ? d.length : "< 1"} ${(d.length > 1) ? "years" : "year"}`)
                 .style("left", `${d3.event.pageX-50}px`)
                 .style("top", `${d3.event.pageY+40}px`)
             }
@@ -111,7 +115,7 @@ document.addEventListener("DOMContentLoaded", e => {
         })
         .on("mousemove", d => {
             if (window.graphActive) {
-                callout.html(`${d.id}</br>${d.team}</br>${d.start}`)
+                callout.html(`${d.id}</br>GM of ${d.team}</br>since ${d.start.getFullYear()}`)
                 .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
                 .style("top", `${d3.event.pageY+40}px`)
             }
