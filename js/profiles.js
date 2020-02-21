@@ -1,5 +1,3 @@
-import pfps from "../assets/*.png";
-
 import dat from "../data/gms.json";
 
 var profiles; 
@@ -125,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     profile_images = svg.append("g").selectAll("image")
     .data(dat)
     .join("image")
-    .attr("xlink:href", d => pfps[d["Picture"].replace(".png", "")])
+    .attr("xlink:href", d => `https://d12jlmu17d0suy.cloudfront.net/nba-gm-graph/${d.Picture}`)
     .attr("height", 60)
     .attr("width", 60)
     .attr("border-radius", "50%");
@@ -146,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     profile_images_gray = svg.append("g").selectAll("image")
     .data(dat)
     .join("image")
-    .attr("xlink:href", d => pfps[d["Picture"].replace(".png", "")])
+    .attr("xlink:href", d => `https://d12jlmu17d0suy.cloudfront.net/nba-gm-graph/${d.Picture}`)
     .attr("height", 60)
     .attr("width", 60)
     .attr("border-radius", "50%")

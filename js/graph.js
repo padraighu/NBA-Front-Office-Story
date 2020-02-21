@@ -1,4 +1,3 @@
-import pfps from "../assets/*.png";
 import links from "../analysis/links.json"; // TODO why analysis? 
 import nodes from "../data/nodes.json";
 
@@ -117,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     var avatars = svg.append("g").selectAll("image")
     .data(nodes)
     .join("image")
-        .attr("xlink:href", d => pfps[d.pfp.replace(".png", "")])
+        .attr("xlink:href", d => `https://d12jlmu17d0suy.cloudfront.net/nba-gm-graph/${d.pfp}`)
         .attr("x", d => (d.x - 30))
         .attr("y", d => (d.y - 30))
         .attr("height", 60)

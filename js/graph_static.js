@@ -1,4 +1,3 @@
-import pfps from "../assets/*.png";
 import links from "../data/links.json";
 import nodes from "../data/nodes.json";
 
@@ -81,7 +80,7 @@ document.addEventListener("DOMContentLoaded", e => {
         .selectAll("image")
         .data(nodes)
         .join("image")
-        .attr("xlink:href", d => pfps[d.pfp.replace(".png", "")])
+        .attr("xlink:href", d => `https://d12jlmu17d0suy.cloudfront.net/nba-gm-graph/${d.pfp}`)
         .attr("transform", d => `translate(${d.x-30}, ${d.y-30})`)
         .attr("height", 60)
         .attr("width", 60)
