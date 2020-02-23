@@ -186,6 +186,7 @@ document.addEventListener("DOMContentLoaded", e => {
             if (currentStep == "kupchak-riley" && response.direction == "up") {
                 // disable and hide graph
                 disableGraph();
+                resetGraph();
                 hideGraph();
             }
             if (currentStep == "pritchard-presti" && response.direction == "up") {
@@ -206,6 +207,7 @@ document.addEventListener("DOMContentLoaded", e => {
             }
             if (currentStep == "ainge-nelson" && response.direction == "up") {
                 hideAllBackgroundImages();
+                showGraph();
             }
             if (currentStep == "graph-conclude" && response.direction == "down") {
                 d3.select("#graph-conclude").transition().style("opacity", 0);
