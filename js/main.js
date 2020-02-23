@@ -48,6 +48,14 @@ document.addEventListener("DOMContentLoaded", e => {
         "pritchard-presti",
         "kupchak-riley"
     ];
+
+    const hideAllBackgroundImages = () => {
+        allBackground
+            .forEach(b => {
+                d3.select("#"+b)
+                    .style("opacity", 0);
+            });
+    };
     
     const suffix = /-p$/;
     scroller
@@ -187,11 +195,7 @@ document.addEventListener("DOMContentLoaded", e => {
         .onStepExit(response => {
             let currentStep = response.element.id.replace(suffix, "");
             if (currentStep == "kupchak-riley" && response.direction == "down") {
-                allBackground
-                    .forEach(b => {
-                        d3.select("#"+b)
-                            .style("opacity", 0);
-                    });
+                hideAllBackgroundImages();
                 // allow user to interact with graph
                 // TODO restore state if user scroll up instead
                 // TODO reset highlighting 
@@ -201,11 +205,7 @@ document.addEventListener("DOMContentLoaded", e => {
                 // d3.select("#graph").style("position: static");
             }
             if (currentStep == "ainge-nelson" && response.direction == "up") {
-                allBackground
-                    .forEach(b => {
-                        d3.select("#"+b)
-                            .style("opacity", 0);
-                    });
+                hideAllBackgroundImages();
             }
             if (currentStep == "graph-conclude" && response.direction == "down") {
                 d3.select("#graph-conclude").transition().style("opacity", 0);
