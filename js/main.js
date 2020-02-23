@@ -1,4 +1,6 @@
 import { lollipopToHistogram, setUpTimeline, histogramToLollipop } from "./timeline.js"
+import { setUpProfiles } from "./profiles.js"
+import { setUpGraph } from "./graph_static.js";
 
 window.graphActive = false;
 
@@ -35,8 +37,7 @@ function updateProfiles(val){
     document.querySelector(`#filter [value="${val}"]`).selected = true;
 }
 
-document.addEventListener("DOMContentLoaded", e => {
-    setUpTimeline();
+function setUpScrollytelling() {
     const scroller = scrollama();
     const allBackground = [
         "ainge-nelson",
@@ -224,4 +225,11 @@ document.addEventListener("DOMContentLoaded", e => {
     
     window.addEventListener("resize", scroller.resize);
     window.addEventListener("resize", () => console.log("resize"));
+}
+
+document.addEventListener("DOMContentLoaded", e => {
+    setUpTimeline();
+    setUpProfiles();
+    setUpGraph();
+    setUpScrollytelling();
 });

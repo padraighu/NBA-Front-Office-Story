@@ -1,7 +1,7 @@
 import links from "../data/links.json";
 import nodes from "../data/nodes.json";
 
-document.addEventListener("DOMContentLoaded", e => {
+export function setUpGraph() {
     const width = 1400;
     const height = 1000;
 
@@ -119,4 +119,4 @@ document.addEventListener("DOMContentLoaded", e => {
                 .style("top", `${d3.event.pageY+40}px`)
             }
         });
-});
+}
