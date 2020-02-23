@@ -20,6 +20,11 @@ function enableGraph() {
     window.graphActive = true;
 }
 
+function hideGraph() {
+    d3.select("#graph").select("svg").transition()
+        .attr("opacity", 0);
+}
+
 function updateProfiles(val){
     window.filterProfiles(val);
     document.querySelector(`#filter [value="${val}"]`).selected = true;
@@ -79,17 +84,14 @@ document.addEventListener("DOMContentLoaded", e => {
                 histogramToLollipop();
             }
             if (currentStep == "ainge-nelson" && response.direction == "down") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
             if (currentStep == "buford-marks-lindsey" && response.direction == "down") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
 
             if (currentStep == "griffin-james" && response.direction == "up") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
             if (currentStep == "suns-intro") {
                 d3.select("#graph").select("svg").selectAll("image")
@@ -168,18 +170,15 @@ document.addEventListener("DOMContentLoaded", e => {
                     });
             }
             if (currentStep == "kupchak-riley" && response.direction == "down") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
             if (currentStep == "kupchak-riley" && response.direction == "up") {
                 // disable and hide graph
                 disableGraph();
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
             if (currentStep == "pritchard-presti" && response.direction == "up") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 0);
+                hideGraph();
             }
         })
         .onStepExit(response => {
