@@ -5,3 +5,5 @@ data/*.json
 data/*.csv
 graph_pos.json
 package-lock.json
+assets/
+analysis/
