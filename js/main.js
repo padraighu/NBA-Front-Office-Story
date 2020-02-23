@@ -107,6 +107,10 @@ document.addEventListener("DOMContentLoaded", e => {
                 hideGraph();
             }
             if (currentStep == "suns-intro") {
+                if (response.direction == "up") {
+                    hideAllBackgroundImages();
+                    showGraph();
+                }
                 d3.select("#graph").select("svg").selectAll("image")
                     .attr("filter", a => {
                         if (a.id == "Danny Ainge" || a.id == "Donn Nelson" || a.id == "David Griffin") {
@@ -205,9 +209,8 @@ document.addEventListener("DOMContentLoaded", e => {
                 showGraph();
                 // d3.select("#graph").style("position: static");
             }
-            if (currentStep == "ainge-nelson" && response.direction == "up") {
-                hideAllBackgroundImages();
-                showGraph();
+            if (currentStep == "suns-intro" && response.direction == "up") {
+                resetGraph();
             }
             if (currentStep == "graph-conclude" && response.direction == "down") {
                 d3.select("#graph-conclude").transition().style("opacity", 0);
