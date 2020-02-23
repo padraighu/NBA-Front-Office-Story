@@ -25,6 +25,11 @@ function hideGraph() {
         .attr("opacity", 0);
 }
 
+function showGraph() {
+    d3.select("#graph").select("svg").transition()
+        .attr("opacity", 1);
+}
+
 function updateProfiles(val){
     window.filterProfiles(val);
     document.querySelector(`#filter [value="${val}"]`).selected = true;
@@ -116,8 +121,7 @@ document.addEventListener("DOMContentLoaded", e => {
                     });
             }
             if (currentStep == "spurs-intro") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 1);
+                showGraph();
                 d3.select("#graph").select("svg").selectAll("image")
                     .attr("filter", a => {
                         if (a.id == "R.C. Buford" || a.id == "Sean Marks" || a.id == "Dennis Lindsey" || a.id == "Kevin Pritchard" || a.id == "Sam Presti") {
@@ -150,8 +154,7 @@ document.addEventListener("DOMContentLoaded", e => {
                     });
             }
             if (currentStep == "lakers-intro") {
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 1);
+                showGraph();
                 d3.select("#graph").select("svg").selectAll("image")
                     .attr("filter", a => {
                         if (a.id == "Pat Riley" || a.id == "Mitch Kupchak") {
@@ -189,15 +192,12 @@ document.addEventListener("DOMContentLoaded", e => {
                         d3.select("#"+b)
                             .style("opacity", 0);
                     });
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 1);
                 // allow user to interact with graph
                 // TODO restore state if user scroll up instead
                 // TODO reset highlighting 
                 enableGraph();
-                d3.select("#graph").select("svg").transition()
-                    .attr("opacity", 1);    
                 resetGraph();
+                showGraph();
                 // d3.select("#graph").style("position: static");
             }
             if (currentStep == "ainge-nelson" && response.direction == "up") {
