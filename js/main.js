@@ -8,7 +8,7 @@ function resetGraph() {
     let link = d3.select("#graph").select("svg").selectAll("line");
     let linkWidthScale = d3.scaleOrdinal([0,1,2,3,4,5,6,7], [1,2,3,4,5,6,7,8]).unknown(13);
     avatars.attr("filter", "");
-    link.style("stroke", "#999")
+    link.attr("stroke", "#999")
         .attr("stroke-width", d => (linkWidthScale(d.length)));
 }
 

@@ -103,13 +103,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
                 return "#B8B8B8";
             }
         });
-        link.style("stroke", l => {
+        link.attr("stroke", l => {
             return (l.source === d || l.target === d) ? "black" : "#999";
         });
     })
     .on("mouseout", d => {
         node1.style("fill", "transparent");
-        link.style("stroke", "#999");
+        link.attr("stroke", "#999");
     })
     .call(drag(simulation));
 
@@ -135,13 +135,13 @@ document.addEventListener('DOMContentLoaded', function(e) {
                     return "url(#gray)";
                 }
             });
-            link.style("stroke", l => {
+            link.attr("stroke", l => {
                 return (l.source === d || l.target === d) ? "black" : "#999";
             }).attr("stroke-width", l => ((l.source === d || l.target === d) ? 2 * linkWidthScale(l.length) : linkWidthScale(l.length)));
         })
         .on("mouseout", d => {
             avatars.attr("filter", "");
-            link.style("stroke", "#999")
+            link.attr("stroke", "#999")
                 .attr("stroke-width", d => (linkWidthScale(d.length)));
         });
 
