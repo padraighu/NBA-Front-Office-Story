@@ -5,7 +5,6 @@ import { setUpGraph } from "./graph_static.js";
 window.graphActive = false;
 
 function resetGraph() {
-    console.log("resetGraph() called");
     let avatars = d3.select("#graph").select("svg").selectAll("image");
     let link = d3.select("#graph").select("svg").selectAll("line");
     let linkWidthScale = d3.scaleOrdinal([0,1,2,3,4,5,6,7], [1,2,3,4,5,6,7,8]).unknown(13);
@@ -203,12 +202,9 @@ function setUpScrollytelling() {
             if (currentStep == "kupchak-riley" && response.direction == "down") {
                 hideAllBackgroundImages();
                 // allow user to interact with graph
-                // TODO restore state if user scroll up instead
-                // TODO reset highlighting 
                 enableGraph();
                 resetGraph();
                 showGraph();
-                // d3.select("#graph").style("position: static");
             }
             if (currentStep == "suns-intro" && response.direction == "up") {
                 resetGraph();
@@ -224,7 +220,6 @@ function setUpScrollytelling() {
         });
     
     window.addEventListener("resize", scroller.resize);
-    window.addEventListener("resize", () => console.log("resize"));
 }
 
 document.addEventListener("DOMContentLoaded", e => {

@@ -65,7 +65,7 @@ export function setUpTimeline() {
     bins = d3.histogram()
         .value(d => d["Current Start Date"])
         .domain(dateScale.domain())
-        .thresholds(d3.thresholdFreedmanDiaconis(dates, minDate, maxDate))(dat);//.thresholds()
+        .thresholds(d3.thresholdFreedmanDiaconis(dates, minDate, maxDate))(dat);
 
 
     countScale = d3.scaleLinear()
@@ -82,7 +82,6 @@ export function setUpTimeline() {
         .attr("y", countScale(0))
         .attr("transform", d => `translate(${dateScale(d.x0)}, 0)`)
         .attr("width", d => (dateScale(d.x1)-dateScale(d.x0)-1))
-        // .attr("height", d => (500-countScale(d.length)))
         .attr("height", 500-countScale(0))
         .style("fill", "#69b3a2");
     
@@ -191,7 +190,6 @@ export function setUpTimeline() {
 
  export function lollipopToHistogram() {
     callout.transition()
-        // .delay(500)
         .style("opacity", 0);
     divider.transition()
         .delay(500)
@@ -200,13 +198,10 @@ export function setUpTimeline() {
         .style("opacity", 0);
 
     dots.transition()
-        // .delay(1000)
         .attr("cy", 500);
     lines.transition()
-        // .delay(1000)
         .style("opacity", 0);
     y.transition()
-        // .delay(1000)
         .style("opacity", 0);
     y2.transition()
         .delay(500)
@@ -232,18 +227,13 @@ export function histogramToLollipop() {
         .style("opacity", 1);
 
     y2.transition()
-        // .delay(2000)
         .style("opacity", 0);
 
     bars.transition()
-        //.duration(800)
-        // .delay(2000)
         .attr("height", d => 500-countScale(0))
         .attr("y", d => countScale(0));
 
     dots.transition()
-        //.duration(5000)
-        // .delay(2000)
         .style("opacity", 1);
 
     dots.transition()

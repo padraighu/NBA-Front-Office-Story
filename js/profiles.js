@@ -4,7 +4,6 @@ var profiles;
 var profile_images;
 var profile_images_gray;
 const radius = 30;
-var simulation;
 
 window.filterProfiles = (val) => {
     // svg gray filters are gonna be a little different. can't rely on d3 transition (I think)
@@ -13,9 +12,6 @@ window.filterProfiles = (val) => {
 
     // could use d3 transition later 
     const gmCount = dat.filter(d => (d[val]["val"]==true)).length;
-   //  d3.select("#count")
-   //  //.transition()
-   //  .text(gmCount);
 
     var format = d3.format(",d");
 
@@ -36,8 +32,7 @@ window.filterProfiles = (val) => {
     
     const pct_fmt = d3.format(".1%");
     const pct = (gmCount / 30);
-   //  d3.select("#percentage")
-   //  .text(pct);
+
    d3.select("#percentage")
    .transition()
      .duration(1000)
@@ -151,16 +146,12 @@ export function setUpProfiles() {
   .attr("filter", "url(#gray)")
   .attr("opacity", 0)
   .on("mouseover", d => {
-    //  console.log(`${d.Team} ${d.Name}`);
-    //  console.log(d);
-    //  tooltipG.attr("transform", `translate(${d.x-30}, ${d.y + 50})`)
     callout.style("opacity", 1);
   })
   .on("mousemove", d => {
-    // console.log(`callout ${d3.event.pageX} ${d3.event.pageY}`);
     callout.html(`${d.Name}</br>GM of ${d.Team}</br>since ${d["Current Start Date"].getFullYear()}`)
-    .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
-    .style("top", `${d3.event.pageY+40}px`) //`${d3.event.pageY}px` "500px"
+    .style("left", `${d3.event.pageX-50}px`)
+    .style("top", `${d3.event.pageY+40}px`)
   })
   .on("mouseout", d => {
     callout.style("opacity", 0);

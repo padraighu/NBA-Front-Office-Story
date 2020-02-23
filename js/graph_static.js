@@ -86,7 +86,6 @@ export function setUpGraph() {
         .attr("width", 60)
         .attr("border-radius", "50%")
         .on("mouseover", d => {
-            // console.log(window.graphActive)
             if (window.graphActive) {
                 avatars.attr("filter", a => {
                     if (a === d) {
@@ -115,7 +114,7 @@ export function setUpGraph() {
         .on("mousemove", d => {
             if (window.graphActive) {
                 callout.html(`${d.id}</br>GM of ${d.team}</br>since ${d.start.getFullYear()}`)
-                .style("left", `${d3.event.pageX-50}px`) //`${d3.event.pageX}px` "100px"
+                .style("left", `${d3.event.pageX-50}px`)
                 .style("top", `${d3.event.pageY+40}px`)
             }
         });

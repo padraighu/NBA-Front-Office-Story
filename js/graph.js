@@ -1,4 +1,4 @@
-import links from "../analysis/links.json"; // TODO why analysis? 
+import links from "../analysis/links.json"; 
 import nodes from "../data/nodes.json";
 
 var node1;

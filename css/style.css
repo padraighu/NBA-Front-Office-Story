@@ -15,7 +15,6 @@ h1, #byline {
 }
 
 .intermission {
-    /* margin-top: 15%; */
     margin-bottom: 15%;
 }
 
@@ -73,14 +72,11 @@ figure {
     -moz-transition: opacity 1s ease-in-out;
     -o-transition: opacity 1s ease-in-out;
     transition: opacity 1s ease-in-out;
-    /* transition: background-image 1s ease-in-out; */
 }
 
 #timeline, #profiles {
     margin-left: 10%;
     margin-right: 10%;
-    /* margin-top: 10%;
-    margin-bottom: 10%; */
     padding-top: 5%;
 }
 
@@ -92,7 +88,3 @@ figure {
 .social {
     margin-top: 5%;
 }
-
-/* article {
-    position: relative;
-} */
