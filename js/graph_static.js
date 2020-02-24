@@ -5,9 +5,10 @@ export default function setUpGraph() {
   const width = 1400;
   const height = 1000;
   let avatars;
+  const parseTime = d3.timeParse('%Y-%m-%d');
 
   nodes.forEach((n) => {
-    n.start = new Date(Date.parse(n.start));
+    n.start = parseTime(n.start);
   });
 
   const svg = d3.select('#graph').append('svg')

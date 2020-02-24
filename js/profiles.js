@@ -90,10 +90,6 @@ export default function setUpProfiles() {
       .text(f.text);
   });
 
-  dat.forEach((d) => {
-    d['Current Start Date'] = new Date(Date.parse(d['Current Start Date']));
-  });
-
   const svg = d3.select('#profiles')
     .append('svg')
     .attr('viewBox', '0 0 1000 800');

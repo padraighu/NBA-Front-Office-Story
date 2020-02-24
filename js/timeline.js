@@ -24,12 +24,13 @@ const margin = {
 };
 
 export function setUpTimeline() {
+  const parseTime = d3.timeParse('%Y-%m-%d');
   const svg = d3.select('#timeline')
     .append('svg')
     .attr('viewBox', `-10 -10 ${width} ${height}`);
 
   dat.forEach((d) => {
-    d['Current Start Date'] = Date.parse(d['Current Start Date']);
+    d['Current Start Date'] = parseTime(d['Current Start Date']);
   });
 
   dat.sort((a, b) => ((a['Current Start Date'] - b['Current Start Date'])));
