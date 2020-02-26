@@ -7,3 +7,4 @@ graph_pos.json
 package-lock.json
 assets/
 analysis/
+node_modules/
