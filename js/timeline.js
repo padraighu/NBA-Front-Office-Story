@@ -157,7 +157,7 @@ export function setUpTimeline() {
 
   const topGMs = [{
     note: {
-      label: '13 championships won',
+      label: '12 championships won',
     },
     dx: -50,
     dy: -7,
