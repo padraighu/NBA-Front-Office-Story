@@ -1,0 +1,24 @@
+{
+  "name": "nba-gm",
+  "version": "1.0.0",
+  "description": "nba-gm",
+  "main": "html/index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/padraighu/NBA-Front-Office-Story.git"
+  },
+  "author": "Yifei Hu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/padraighu/NBA-Front-Office-Story/issues"
+  },
+  "homepage": "https://github.com/padraighu/NBA-Front-Office-Story#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  },
+  "scripts": {
+    "serve": "parcel html/index.html"
+  }
+}
