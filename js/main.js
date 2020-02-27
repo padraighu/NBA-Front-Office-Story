@@ -47,7 +47,7 @@ function isMobile() {
 
 function notifyMobileUser() {
   if (isMobile()) {
-    window.alert('Hey there! I would advise to view this page with a desktop where the experience will be the best.');
+    window.alert('Hey there! I would advise to view this page with a desktop where the experience will be the best. Or rotate your device to landscape orientation!');
   }
 }
 
