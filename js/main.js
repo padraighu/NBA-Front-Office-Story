@@ -38,6 +38,19 @@ function updateProfiles(val) {
   document.querySelector(`#filter [value="${val}"]`).selected = true;
 }
 
+function isMobile() {
+  if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
+    return true;
+  }
+  return false;
+}
+
+function notifyMobileUser() {
+  if (isMobile()) {
+    window.alert('Hey there! I would advise to view this page with a desktop where the experience will be the best.');
+  }
+}
+
 function setUpScrollytelling() {
   const scroller = scrollama();
   const allBackground = [
@@ -216,6 +229,7 @@ function setUpScrollytelling() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  notifyMobileUser();
   setUpTimeline();
   setUpProfiles();
   setUpGraph();
