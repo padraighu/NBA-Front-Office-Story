@@ -67,9 +67,7 @@ function setUpScrollytelling() {
       debug: true,
     })
     .onStepEnter((response) => {
-      console.log(response);
       const currentStep = response.element.id.replace(suffix, '');
-      console.log(currentStep);
       if (currentStep !== 'graph-canary' && currentStep !== 'profiles-canary') {
         d3.select(`#${currentStep}`)
           .style('opacity', 1);
