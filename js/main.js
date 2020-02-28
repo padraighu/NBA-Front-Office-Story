@@ -76,7 +76,7 @@ function setUpScrollytelling() {
   scroller
     .setup({
       step: '.step',
-      offset: 0.33,
+      offset: 0.5,
       debug: true,
     })
     .onStepEnter((response) => {
