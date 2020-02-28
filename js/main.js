@@ -77,7 +77,7 @@ function setUpScrollytelling() {
     .setup({
       step: '.step',
       offset: 0.5,
-      debug: true,
+      debug: false,
     })
     .onStepEnter((response) => {
       const currentStep = response.element.id.replace(suffix, '');
