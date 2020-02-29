@@ -58,6 +58,11 @@ export function setUpTimeline() {
     .attr('transform', 'translate(0, 500)')
     .call(xAxis);
 
+  svg.append('text')
+    .attr('transform', `translate(${width / 2 - 60}, ${540})`)
+    .style('text-anchor', 'middle')
+    .text('Start Date of Current Position');
+
   y = svg.append('g')
     .attr('transform', 'translate(1000, 0)')
     .attr('id', 'y')
