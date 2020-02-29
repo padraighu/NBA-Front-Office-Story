@@ -48,7 +48,7 @@ export function setUpTimeline() {
   const xAxis = d3.axisBottom(dateScale);
 
   gmScale = d3.scaleBand()
-    .domain(dat.map((d) => d.Name))
+    .domain(dat.map((d) => d.nameAndTeam))
     .range([0, 500]).padding(1)
     .round(true);
 
@@ -98,8 +98,8 @@ export function setUpTimeline() {
     .join('line')
     .attr('x1', (d) => dateScale(d['Current Start Date']))
     .attr('x2', dateScale(maxDate))
-    .attr('y1', (d) => (gmScale(d.Name) + 0.5))
-    .attr('y2', (d) => (gmScale(d.Name) + 0.5))
+    .attr('y1', (d) => (gmScale(d.nameAndTeam) + 0.5))
+    .attr('y2', (d) => (gmScale(d.nameAndTeam) + 0.5))
     .attr('stroke', 'gray');
   dots = svg.append('g')
     .selectAll('circle')
@@ -107,7 +107,7 @@ export function setUpTimeline() {
     .join('circle')
     .attr('transform', 'translate(0, 0)')
     .attr('cx', (d) => (dateScale(d['Current Start Date'])))
-    .attr('cy', (d) => (gmScale(d.Name)))
+    .attr('cy', (d) => (gmScale(d.nameAndTeam)))
     .attr('r', 5)
     .attr('fill', 'green')
     .attr('stroke', 'black');
@@ -130,7 +130,7 @@ export function setUpTimeline() {
     .type(d3.annotationCalloutRect)
     .accessors({
       x: (d) => (dateScale(d['Current Start Date']) - 8),
-      y: (d) => (gmScale(d.Name) - 8),
+      y: (d) => (gmScale(d.nameAndTeam) - 8),
     })
     .annotations(annotations);
 
@@ -151,7 +151,7 @@ export function setUpTimeline() {
     .type(d3.annotationCalloutRect)
     .accessors({
       x: (d) => (dateScale(d['Current Start Date']) + 74),
-      y: (d) => (gmScale(d.Name) - 120),
+      y: (d) => (gmScale(d.nameAndTeam) - 120),
     })
     .annotations(lineDivide);
 
@@ -163,7 +163,7 @@ export function setUpTimeline() {
     dy: -7,
     data: dat.find((d) => d.Name === 'Pat Riley'),
     subject: {
-      width: 65,
+      width: 120,
       height: 125,
     },
   }];
@@ -172,7 +172,7 @@ export function setUpTimeline() {
     .type(d3.annotationCalloutRect)
     .accessors({
       x: () => 1005,
-      y: (d) => gmScale(d.Name) - 5,
+      y: (d) => gmScale(d.nameAndTeam) - 5,
     })
     .annotations(topGMs);
 
@@ -240,7 +240,7 @@ export function histogramToLollipop() {
   dots.transition()
     .delay(500)
     .attr('cx', (d) => (dateScale(d['Current Start Date'])))
-    .attr('cy', (d) => (gmScale(d.Name)));
+    .attr('cy', (d) => (gmScale(d.nameAndTeam)));
 
   lines.transition()
     .delay(500)

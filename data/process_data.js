@@ -2,6 +2,13 @@
 const fs = require('fs');
 const path = require('path');
 
+function gmTeamKey(gm) {
+  // GM's name and team defines a unique observation on the y axis
+  const teamSplit = gm.Team.split(' ');
+  const teamNameExGeo = teamSplit[teamSplit.length - 1];
+  return `${gm.Name} (${teamNameExGeo})`;
+}
+
 const gms = JSON.parse(fs.readFileSync(path.join(__dirname, 'gms_staging.json'), 'utf8'));
 const gmPos = JSON.parse(fs.readFileSync(path.join(__dirname, '../graph_pos.json'), 'utf8'));
 const links = JSON.parse(fs.readFileSync(path.join(__dirname, 'links_staging.json'), 'utf8'));
@@ -45,9 +52,10 @@ filters.forEach((f) => {
     }
   });
 });
-let x = 0; let
-  y = 0;
+let x = 0;
+let y = 0;
 gms.forEach((d) => {
+  d.nameAndTeam = gmTeamKey(d);
   d.Init = { val: true, x: 350 + 65 * (x % 6), y: 100 + 65 * y };
   x++;
   if (x % 6 === 0) y++;
