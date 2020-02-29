@@ -21,6 +21,7 @@
     "posthtml-include": "^1.4.0"
   },
   "scripts": {
-    "serve": "parcel html/index.html"
+    "serve": "parcel html/index.html",
+    "build": "parcel build --public-url '.' html/index.html"
   }
 }
