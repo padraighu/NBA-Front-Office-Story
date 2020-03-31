@@ -1,6 +1,8 @@
 import links from '../data/links.json';
 import nodes from '../data/nodes.json';
 
+import teamLogo from '../assets/logos/*.png';
+
 export default function setUpGraph() {
   const width = 1400;
   const height = 1000;
@@ -81,6 +83,15 @@ export default function setUpGraph() {
     .attr('stroke', 'black')
     .attr('stroke-width', 1.5);
 
+  const team = svg.append('g')
+    .selectAll('image')
+    .data(nodes)
+    .join('image')
+    .attr('xlink:href', (d) => teamLogo[d.pfp.replace('_pfp.png', '')])
+    .attr('transform', (d) => `translate(${d.x - 60}, ${d.y - 30})`)
+    .attr('width', 30)
+    .attr('height', 30);
+
   avatars = svg.append('g')
     .selectAll('image')
     .data(nodes)
@@ -122,4 +133,17 @@ export default function setUpGraph() {
           .style('top', `${d3.event.pageY + 40}px`);
       }
     });
+
+  const labels = svg.append('g')
+    .selectAll('text')
+    .data(nodes)
+    .join('text')
+    .attr('transform', (d) => {
+      // Avoid overlap for some labels
+      if (d.id === 'Tim Connelly') return `translate(${d.x + 40}, ${d.y})`;
+      if (d.id === 'Masai Ujiri') return `translate(${d.x - 140}, ${d.y - 10})`;
+      return `translate(${d.x - 50}, ${d.y + 45})`;
+    })
+    .style('font-family', 'Arial, Helvetica, sans-serif')
+    .text((n) => `${n.id}`);
 }
