@@ -84,7 +84,8 @@ export default function setUpGraph() {
     .attr('stroke', 'black')
     .attr('stroke-width', 1.5);
 
-  const team = svg.append('g')
+  // team logos
+  svg.append('g')
     .selectAll('image')
     .data(nodes)
     .join('image')
@@ -135,7 +136,8 @@ export default function setUpGraph() {
       }
     });
 
-  const labels = svg.append('g')
+  // name labels
+  svg.append('g')
     .selectAll('text')
     .data(nodes)
     .join('text')
