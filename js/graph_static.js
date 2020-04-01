@@ -1,8 +1,6 @@
 import links from '../data/links.json';
 import nodes from '../data/nodes.json';
 
-import teamLogo from '../assets/logos/*.png';
-
 export default function setUpGraph() {
   const width = 1400;
   const height = 1000;
@@ -89,7 +87,7 @@ export default function setUpGraph() {
     .selectAll('image')
     .data(nodes)
     .join('image')
-    .attr('xlink:href', (d) => teamLogo[d.pfp.replace('_pfp.png', '')])
+    .attr('xlink:href', (d) => `http://d12jlmu17d0suy.cloudfront.net/nba-gm-graph/team-logo/${d.pfp.replace('_pfp', '')}`)
     .attr('transform', (d) => `translate(${d.x - 60}, ${d.y - 30})`)
     .attr('width', 30)
     .attr('height', 30);
