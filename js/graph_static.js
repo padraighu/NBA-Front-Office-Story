@@ -23,7 +23,8 @@ export default function setUpGraph() {
     .style('border', 'solid')
     .style('border-width', '2px')
     .style('border-radius', '5px')
-    .style('padding', '5px');
+    .style('padding', '5px')
+    .style('font-family', 'Arial, Helvetica, sans-serif');
 
   const defs = svg.append('svg:defs');
   const gray = defs.append('filter')

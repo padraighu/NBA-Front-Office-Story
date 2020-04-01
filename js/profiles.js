@@ -130,7 +130,8 @@ export default function setUpProfiles() {
     .style('border-radius', '5px')
     .style('padding', '5px')
     .style('left', 400) // TODO is this needed?
-    .style('top', 100);
+    .style('top', 100)
+    .style('font-family', 'Arial, Helvetica, sans-serif');
 
   profileImagesGray = svg.append('g').selectAll('image')
     .data(dat)
