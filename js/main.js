@@ -51,6 +51,15 @@ function notifyMobileUser() {
   }
 }
 
+function setZIndexIfMobile() {
+  // For unknown reason, in mobile browsers step elements are under
+  // the svgs rendering the text unreadable.
+  // Setting z-index of figure elements to -1 addresses this problem.
+  if (isMobile()) {
+    d3.selectAll('figure').style('z-index', -1);
+  }
+}
+
 function setUpScrollytelling() {
   const scroller = scrollama();
   const allBackground = [
@@ -229,6 +238,7 @@ function setUpScrollytelling() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  setZIndexIfMobile();
   notifyMobileUser();
   setUpTimeline();
   setUpProfiles();
